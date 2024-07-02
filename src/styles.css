@@ -1,1 +1,94 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --green: #013D03;
+    --yellow: #F2DC5D;
+    --red: #66012E;
+    --brown: #2C0014;
+    --brown2: #BFACB0;
+
+}
+
+
+/* font */
+
+.satisfy-regular {
+    font-family: "Satisfy", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.angkor-regular {
+    font-family: "Angkor", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+ 
+.lato-regular {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.lato-semibold {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.lato-bold {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+
+
+
+
+
+/* Background */
+
+.bg-green {
+    background-color: var(--green);
+}
+
+.bg-yellow {
+    background-color: var(--yellow);
+}
+
+.bg-brown {
+    background-color: var(--brown2);
+}
+
+
+/* Text color */
+
+.hover-text-yellow:hover {
+    color:var(--yellow);
+    transition: all ease 0.5s;
+}
+
+.text-brown {
+    color:var(--brown);
+}
+
+.font-green {
+    color:var(--green);
+}
+
+
+/* Bouton */ 
+
+.btn-cta {
+    background-color: var(--yellow);
+    color: var(--red);
+}
+  
+.btn-cta:hover {
+background-color: #e9ce35;
+transition: all 0.5s ease;
+}

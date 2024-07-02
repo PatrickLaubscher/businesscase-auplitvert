@@ -1,0 +1,64 @@
+<section>
+    <div class="container max-w-screen-xl mx-auto">
+    
+        <div class="mt-10 mb-40 mx-auto w-full">
+            <h1 class="mx-auto mb-20 px-4 angkor-regular text-2xl text-brown">Nouveau compte client</h1>
+
+            <form class="max-w-screen-md w-1/4-lg px-4 mx-auto" [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="relative z-0 w-1/4 mb-7 group">
+                    <label for="Civility" class="peer-focus:font-medium absolute text-brown text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Civilité</label>
+                    <select formControlName="civility" id="civility" class="block py-2.5 px-0 w-full text-brown text-base bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-900 focus:outline-none focus:ring-0 focus:border-green-900 peer" required>
+                        @for (civility of civilities; track civility) {
+                            <option class="text-brown" value="{{civility.id}}">{{civility.name}}</option>
+                        }
+                    </select>
+                </div>
+                <div class="grid md:grid-cols-2 md:gap-6">
+                    <div class="relative z-0 w-full mb-8 group">
+                        <input type="text" formControlName="firstname" id="firstname" class="block py-2.5 px-0 w-full text-brown text-xl bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-900 peer" placeholder=" " required />
+                        <label for="firstname" class="peer-focus:font-medium absolute text-brown text-base dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] Speer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Prénom</label>
+                    </div>
+                    <div class="relative z-0 w-full mb-8 group">
+                        <input type="text" formControlName="lastname" id="lastname" class="block py-2.5 px-0 w-full text-brown text-xl bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-900 peer" placeholder=" " required />
+                        <label for="lastname" class="peer-focus:font-medium absolute text-brown text-base dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Nom</label>
+                    </div>
+                </div>
+                <div class="relative z-0 w-full mb-8 group">
+                    <input type="text" formControlName="address" id="address" class="block py-2.5 px-0 w-full text-brown text-xl bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-900 peer" placeholder=" " required />
+                    <label for="address" class="peer-focus:font-medium absolute text-brown text-base dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Adresse</label>
+                </div>
+                <div class="relative z-0 w-1/2 mb-8 group">
+                    <label for="city" class="peer-focus:font-medium absolute text-brown text-xl dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Ville</label>
+                    <select type="text" formControlName="city" id="city" class="block py-2.5 px-0 w-full text-brown text-xl bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-900 focus:outline-none focus:ring-0 focus:border-green-900 peer" placeholder=" " required>
+                        @for (city of cities; track city) {
+                            <option class="text-brown" value="{{city.id}}">{{city.name}}</option>
+                        }
+                    </select>
+                    
+                </div>
+                <div class="relative z-0 w-full mb-8 group">
+                    <input type="email" formControlName="email" id="email" class="block py-2.5 px-0 w-full text-brown text-xl bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-900 peer" placeholder=" " required />
+                    <label for="floating_email" class="peer-focus:font-medium absolute text-brown text-base dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Adresse email</label>
+                </div>
+                <div class="relative z-0 w-full mb-8 group">
+                    <input type="password" formControlName="password" id="password" class="block py-2.5 px-0 w-full text-brown text-xl bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                    <label for="floating_password" class="peer-focus:font-medium absolute text-brown text-base dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Mot de passe</label>
+                </div>
+                <div class="relative z-0 w-full mb-8 group">
+                    <input type="password" name="repeat_password" id="floating_repeat_password" class="block py-2.5 px-0 w-full text-brown text-xl bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-900 peer" placeholder=" "/>
+                    <label for="floating_repeat_password" class="peer-focus:font-medium absolute text-brown text-xl dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirmer le mot de passe</label>
+                </div>
+                <div class="grid md:grid-cols-2 md:gap-6">
+                    <div class="relative z-0 w-full mb-5 group">
+                        <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" formControlName="phone" id="phone" class="block py-2.5 px-0 w-full text-brown text-xl bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-900 peer" placeholder=" " required />
+                        <label for="phone" class="peer-focus:font-medium absolute text-brown text-base dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Numéro de téléphone</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn-cta font-medium rounded-lg text-xl w-full sm:w-auto mt-8 px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Envoyer</button>
+            </form>
+    
+        </div>
+    </div>
+</section>
+
+
