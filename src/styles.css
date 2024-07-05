@@ -46,10 +46,6 @@
 
 
 
-
-
-
-
 /* Background */
 
 .bg-green {
@@ -62,6 +58,27 @@
 
 .bg-brown {
     background-color: var(--brown2);
+}
+
+.bg-logo {
+    background-image: url('../public/img/bg-logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+
+/* Border */
+
+.circle1 {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+}
+
+.circle2 {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
 }
 
 

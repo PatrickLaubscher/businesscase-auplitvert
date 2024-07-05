@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { initFlowbite } from 'flowbite';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './public/header/header.component';
+import { FooterComponent } from './public/footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,8 @@ import { FooterComponent } from './footer/footer.component';
 })
 export class AppComponent {
   title = 'Au Pli Vert - Pressing écologique';
+
+  
 
   ngOnInit(): void {
     initFlowbite();

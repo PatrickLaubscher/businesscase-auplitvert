@@ -9,4 +9,4 @@ export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideHttpClient(withInterceptors([AuthInterceptor]))]
 };
 
-export const apiUrl:string = "http://127.0.0.1:8000/api";
+

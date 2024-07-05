@@ -3,13 +3,17 @@ export interface AllowedUrl {
     methods: string[];
 }
 
-export interface UserAuthen {
+export interface Credentials {
     username: string,
     password: string
 }
 
+export interface Token {
+    token: string;
+    refresh_token: string;
+}
+
 export interface User {
-    id: number,
     roles: string[],
     email: string;
     firstname: string;
@@ -17,13 +21,24 @@ export interface User {
 }
 
 export interface Admin {
-    id: number,
     civility: string,
     firstname: string,
     lastname: string,
     phone: string,
     email: string,
 }
+
+export interface Employee {
+    civility: string,
+    firstname: string,
+    lastname: string,
+    phone: string,
+    email: string,
+    orderLines: string[]
+    status: string
+    creationDate: string
+}
+
 
 export interface newCustomer {
     civility: string,

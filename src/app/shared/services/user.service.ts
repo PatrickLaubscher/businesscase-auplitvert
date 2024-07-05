@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { User } from '../entities';
 import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { apiUrl } from '../../app.config';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,25 +10,28 @@ import { apiUrl } from '../../app.config';
 export class UserService {
 
   private http = inject(HttpClient);
+  private apiUrl = environment.apiUrl;
 
   user:User|undefined;
 
   fetchOneUserByEmail (email: string): Observable<User|undefined> {
-    return this.http.get<any>(`${apiUrl}/users?email=${email}`).pipe(
-      map((response => {
-        if (response && response['hydra:member'] && response['hydra:member'].length > 0) {
-          const user = response["hydra:member"][0];
-          return {
-            id: user.id,
-            roles: user.roles,
-            email: user.email,
-            firstname: user.firstname,
-            lastname: user.lastname
-          } as User;
-          } return undefined;
-        }) 
-      )
-    );
+    return this.http.get<any>(`${this.apiUrl}/users?email=${email}`);
   }
+
+  setUser(user: User): void {
+    return localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  getUser(): User | null {
+    const userStr = localStorage.getItem('user');
+    const users = userStr ? JSON.parse(userStr) : null;
+    return users ? users[0] : null;
+  }
+
+  getRoles(): string[] | null {
+    const user = this.getUser();
+    return user ? user.roles : null;
+  }
+
 
 }
