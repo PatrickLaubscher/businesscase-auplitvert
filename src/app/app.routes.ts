@@ -9,6 +9,8 @@ import { authGuard } from './shared/auth.guard';
 import { adminGuard } from './shared/admin.guard';
 import { AdminHomeComponent } from './private/admin/admin-home/admin-home.component';
 import { EmployeeListComponent } from './private/admin/employee-list/employee-list.component';
+import { EmployeeDetailsComponent } from './private/admin/employee-details/employee-details.component';
+import { AddEmployeeComponent } from './private/admin/add-employee/add-employee.component';
 
 
 
@@ -25,7 +27,9 @@ export const routes: Routes = [
             {path: 'admin', component: AdminDashboardComponent, canActivate:[adminGuard], 
                 children: [
                     {path: '', component: AdminHomeComponent},
-                    {path: 'employees', component: EmployeeListComponent}
+                    {path: 'employees', component: EmployeeListComponent},
+                    {path: 'employee/:id', component: EmployeeDetailsComponent},
+                    {path: 'add-employee', component: AddEmployeeComponent}
                 ]
             },
         ]

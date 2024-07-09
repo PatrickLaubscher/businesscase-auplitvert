@@ -1,35 +1,29 @@
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-        <h1 class="text-2xl lato-bold mb-7">Espace Privé - <span class="underline">Gestion des employés</span></h1>
+        <h1 class="text-2xl lato-bold mb-7">Tableau de bord - <span class="underline">Gestion des employés</span></h1>
         <h2 class="text-2xl lato-bold mb-7">Liste des employés</h2>
        
             
             @for (employee of employees$ | async; track employee) {
-            <div class="h-48 mb-4 p-4 grid grid-cols-3 gap-2 rounded bg-gray-50 dark:bg-gray-800">
+            <div class="h-48-md mb-4 p-4 grid grid-cols-3 gap-2 rounded bg-gray-50 dark:bg-gray-800">
                 <div>
-                    <h3 class="text-brown text-xl lato-semibold">{{employee.firstname}} {{employee.lastname}}</h3>
-                    <p>{{ employee.email }}</p>
-                    <p>{{ employee.phone }}</p>
+                    <h3 class="text-brown text-xl lato-bold">{{ employee.civility.abreviation }} {{employee.lastname | uppercase}} {{employee.firstname}}</h3>
+                    <p class="text-brown text-xl lato-semibold">{{ employee.email }}</p>
+                    <p class="text-brown text-xl lato-semibold mb-4">{{ employee.phone }}</p> 
+                    <p class="text-brown text-xl lato-semibold">Statut: {{ employee.employee_status.name }}</p>
                 </div>
                 <div>
-                    
+                    <p class="text-brown text-xl lato-bold mb-4">Lignes de commande</p>
+                    <p class="text-brown text-base lato-bold mb-2"><span class="underline">En cours</span>: <span class="text-xl">{{orderLinesCoursMap.get(employee.firstname)?.length}}</span></p>
+                    <p class="text-brown text-base lato-bold"><span class="underline">En attente</span>: <span class="text-xl">{{orderLinesAttenteMap.get(employee.firstname)?.length}}</span></p>
                 </div>
-                <div>
-                    @for (orderLine of employee.orderLines; track orderLine) {
-                        {{ orderLine }}
-                    }
-                    <p>Lignes de commandes attribuées: {{ employee.orderLines.length }}</p>
-
-
+                <div class="h-full flex items-end justify-end">
+                    <div>
+                        <a [routerLink]="['/espace-prive/admin/employee', employee.id]" class="focus:outline-none btn-cta rounded-lg lato-bold px-5 py-1.5 me-2 mb-2 dark:focus:ring-yellow-900">Modifier les infos du compte</a>
+                    </div>
                 </div>
-
-
-
             </div>
-
             }   
 
-
-      
     </div>
  </div>

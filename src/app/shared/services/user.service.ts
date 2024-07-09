@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { User } from '../entities';
-import { map, Observable } from 'rxjs';
+import { Employee, patchEmployee, User } from '../entities';
+import { catchError, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
@@ -16,6 +16,23 @@ export class UserService {
 
   fetchOneUserByEmail (email: string): Observable<User|undefined> {
     return this.http.get<any>(`${this.apiUrl}/users?email=${email}`);
+  }
+
+  fetchOneUserEmployeeById (id: string): Observable<Employee|undefined> {
+    return this.http.get<Employee>(`${this.apiUrl}/users/${id}`);
+  }
+
+  updateUserEmployee (id:string, employee:patchEmployee): Observable<patchEmployee|undefined> {
+    return this.http.patch<patchEmployee>(`${this.apiUrl}/users/${id}`, employee,{
+      headers: {
+        'Content-Type': 'application/merge-patch+json'
+      }
+    }).pipe(
+      catchError((error) => {
+        console.error('Erreur lors de la modification des informations', error);
+        return throwError(() => error);
+      })
+    )
   }
 
   setUser(user: User): void {

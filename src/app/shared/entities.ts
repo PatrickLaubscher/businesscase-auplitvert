@@ -20,6 +20,7 @@ export interface User {
     lastname: string;
 }
 
+
 export interface Admin {
     civility: string,
     firstname: string,
@@ -28,14 +29,37 @@ export interface Admin {
     email: string,
 }
 
+
 export interface Employee {
+    id: string,
+    civility: Civility,
+    firstname: string,
+    lastname: string,
+    phone: string,
+    email: string,
+    employee_status: EmployeeStatus,
+    creationDate: string,
+    orderLines: OrderLine[]
+}
+
+export interface patchEmployee {
     civility: string,
     firstname: string,
     lastname: string,
     phone: string,
     email: string,
-    orderLines: string[]
-    status: string
+}
+
+export interface newEmployee {
+    civility: string,
+    firstname: string,
+    lastname: string,
+    phone: string,
+    email: string,
+    password: string,
+    employee_status: string,
+    roles: string[],
+    discr: string,
     creationDate: string
 }
 
@@ -68,7 +92,28 @@ export interface City {
     cp: string
 }
 
+
+export interface EmployeeStatus {
+    id: string,
+    name: string
+}
+
+
+export interface OrderLine {
+    id: string,
+    product: {name:string},
+    prestation: {name:string},
+    order_line_status: {name:string},
+    main_order:{id:string},
+    qty:number
+}
+
+export interface OrderLinesStatus {
+    id: string,
+    name: string
+}
+
 export interface category {
     name: string;
-    
 }
+

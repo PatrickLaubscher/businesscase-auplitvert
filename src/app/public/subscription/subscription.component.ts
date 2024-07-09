@@ -39,8 +39,8 @@ export class SubscriptionComponent implements OnInit {
     password: new FormControl('', {validators: [Validators.required, Validators.minLength(4)]}),
     password_confirmation: new FormControl('', {validators: [Validators.required]}),
     phone: new FormControl('', {validators: [Validators.required]}),
-  }, {validators: confirmPasswordValidator},
-);
+    }, {validators: confirmPasswordValidator},
+  );
 
   cities$!: Observable<City[]>;
   civilities$!: Observable<Civility[]>;
@@ -70,8 +70,8 @@ export class SubscriptionComponent implements OnInit {
       this.form.reset();
   
       this.customerService.addNewCustomer(newCustomer).subscribe({    
-        next: (v) => console.log('Votre compte a bien été créé', v),
-        error: (e) => console.error('Il y a eu une erreur dans la création de votre compte',e),
+        next: (validation) => console.log('Votre compte a bien été créé'),
+        error: (error) => console.error('Il y a eu une erreur dans la création de votre compte'),
       });
     }
   }

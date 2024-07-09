@@ -11,7 +11,8 @@ export const allowedUrls: AllowedUrl[] = [
   { url: '/login_check', methods: ['POST'] },
   { url: '/customers', methods: ['POST'] }, 
   { url: '/cities', methods: ['GET'] },
-  { url: '/civilities', methods: ['GET'] }
+  { url: '/civilities', methods: ['GET'] },
+  { url: '/token/refresh', methods: ['POST'] }
 ];
 
 
@@ -30,11 +31,10 @@ export function AuthInterceptor (req: HttpRequest<any>, next: HttpHandlerFn): Ob
   );
 
   if(isAllowedRequest) {
-
     return next(req);
   } else {
     const authReq = req.clone({
-      setHeaders: req.url.includes(`${apiUrl}/token/refresh`) ? {} : {
+      setHeaders: {
         Authorization: `Bearer ${authToken}`
       }
     });

@@ -66,9 +66,8 @@ export class AuthentificationService {
   refreshAccessToken(): Observable<Token> {
     localStorage.removeItem('accessToken');
     const refreshToken = this.getRefreshToken();
-    const headers = new HttpHeaders();
     return this.http
-      .post<Token>(`${this.apiUrl}/token/refresh`, {refresh_token: refreshToken },{ headers })
+      .post<Token>(`${this.apiUrl}/token/refresh`, {refresh_token: refreshToken })
       .pipe(
       tap(response => { 
         this.setToken(response.token);
@@ -81,7 +80,7 @@ export class AuthentificationService {
   }
 
   checkIfAuthenticated(): boolean {
-    const token = this.getToken();
+    const token = this.getRefreshToken();
     return !!token;
   }
 
