@@ -64,6 +64,18 @@ export interface newEmployee {
 }
 
 
+export interface Customer {
+    civility: Civility,
+    firstname: string,
+    lastname: string,
+    address: string,
+    city: City,
+    email: string,
+    phone: string,
+    creationDate: string
+}
+
+
 export interface newCustomer {
     civility: string,
     firstname: string,
@@ -89,13 +101,21 @@ export interface Civility{
 export interface City {
     id: string,
     name: string,
-    cp: string
+    zip_code: string
 }
 
 
 export interface EmployeeStatus {
     id: string,
     name: string
+}
+
+
+export interface Order {
+    id: string,
+    date: string,
+    orderLines: OrderLine[],
+    customer: Customer
 }
 
 
@@ -107,6 +127,7 @@ export interface OrderLine {
     main_order:{id:string},
     qty:number
 }
+
 
 export interface OrderLinesStatus {
     id: string,

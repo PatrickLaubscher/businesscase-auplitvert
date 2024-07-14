@@ -48,5 +48,14 @@ export class EmployeeService {
     )
   }
 
+  deleteEmployee(id:string) {
+    return this.http.delete(`${this.apiUrl}/employees/${id}`).pipe(
+      catchError((error) => {
+        console.error('Erreur lors de la suppression du compte', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
   
 }

@@ -70,8 +70,11 @@ export class SubscriptionComponent implements OnInit {
       this.form.reset();
   
       this.customerService.addNewCustomer(newCustomer).subscribe({    
-        next: (validation) => console.log('Votre compte a bien été créé'),
+        next: () => console.log('Le compte a bien été créé'),
         error: (error) => console.error('Il y a eu une erreur dans la création de votre compte'),
+        complete() {
+          (prompt:string) => prompt = "Votre compte client a bien été créé, merci!" 
+        },
       });
     }
   }

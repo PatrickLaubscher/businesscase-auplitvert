@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
-import { AuthentificationService } from './services/authentification.service';
-import { AllowedUrl } from './entities';
+import { AuthentificationService } from '../services/authentification.service';
+import { AllowedUrl } from '../entities';
 import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 
 export const allowedUrls: AllowedUrl[] = [

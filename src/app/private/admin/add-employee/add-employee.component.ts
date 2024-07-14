@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Civility, EmployeeStatus, newEmployee } from '../../../shared/entities';
 import { EmployeeService } from '../../../shared/services/employee.service';
 import { EmployeeStatusService } from '../../../shared/services/employee-status.service';
+import { Router } from '@angular/router';
 
 
 export const confirmPasswordValidator: ValidatorFn = (
@@ -26,6 +27,7 @@ export const confirmPasswordValidator: ValidatorFn = (
 })
 export class AddEmployeeComponent implements OnInit {
 
+  private router = inject(Router);
   private civilityService = inject(CivilityService);
   private employeeService = inject(EmployeeService);
   private employeeStatusService = inject(EmployeeStatusService);
@@ -85,7 +87,9 @@ export class AddEmployeeComponent implements OnInit {
       this.form.reset();
   
       this.employeeService.addNewEmployee(newEmployee).subscribe({    
-        next: (validation) => console.log('Le compte de l\'employé(e) a bien été créé'),
+        next: () => {console.log('Le compte de l\'employé(e) a bien été créé'),
+          this.router.navigateByUrl('/espace-prive/admin/employees');
+         },
         error: (error) => console.error('Il y a eu une erreur dans la création du compte'),
       });
     }

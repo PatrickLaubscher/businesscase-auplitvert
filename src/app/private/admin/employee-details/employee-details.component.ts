@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Civility, Employee, EmployeeStatus, patchEmployee} from '../../../shared/entities';
 import { UserService } from '../../../shared/services/user.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -20,6 +20,7 @@ import { EmployeeService } from '../../../shared/services/employee.service';
 export class EmployeeDetailsComponent implements OnInit {
 
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private userService = inject(UserService);
   private civilityService = inject(CivilityService);
   private employeeService = inject(EmployeeService);
@@ -28,6 +29,7 @@ export class EmployeeDetailsComponent implements OnInit {
   employee$:Employee | undefined;
   civilities$!: Observable<Civility[]>;
   employeeStatus$!: Observable<EmployeeStatus[]>;
+  
 
   form: FormGroup = new FormGroup({
     civility: new FormControl('', {validators: [Validators.required]}),
@@ -123,7 +125,7 @@ export class EmployeeDetailsComponent implements OnInit {
       console.log(newStatus);
       this.employeeService.updateStatusEmployee(this.id, newStatus).subscribe(
         {    
-          next: (validation) => {console.log('Les modifications ont été effectuées') 
+          next: () => {console.log('Les modifications ont été effectuées') 
             this.form.reset();
             location.reload();
           },
@@ -131,4 +133,18 @@ export class EmployeeDetailsComponent implements OnInit {
         });
     }
   }
+
+  
+  deleteEmployeeAccount() {
+    return this.employeeService.deleteEmployee(this.id).subscribe(
+      {    
+        next: () => {console.log('Le compte a bien été supprimé') 
+          this.router.navigateByUrl('/espace-prive/admin/employees');
+        },
+        error: (error) => console.error('Il y a eu une erreur lors de la suppression du compte'),
+      });
+    
+  }
+
+
 } 

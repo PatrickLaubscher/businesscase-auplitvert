@@ -11,6 +11,7 @@ import { AdminHomeComponent } from './private/admin/admin-home/admin-home.compon
 import { EmployeeListComponent } from './private/admin/employee-list/employee-list.component';
 import { EmployeeDetailsComponent } from './private/admin/employee-details/employee-details.component';
 import { AddEmployeeComponent } from './private/admin/add-employee/add-employee.component';
+import { OrderListComponent } from './private/admin/order-list/order-list.component';
 
 
 
@@ -29,7 +30,8 @@ export const routes: Routes = [
                     {path: '', component: AdminHomeComponent},
                     {path: 'employees', component: EmployeeListComponent},
                     {path: 'employee/:id', component: EmployeeDetailsComponent},
-                    {path: 'add-employee', component: AddEmployeeComponent}
+                    {path: 'add-employee', component: AddEmployeeComponent},
+                    {path: 'orders', component: OrderListComponent},
                 ]
             },
         ]

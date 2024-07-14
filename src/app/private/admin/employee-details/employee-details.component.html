@@ -16,7 +16,7 @@
             <button type="submit" class="btn-cta font-medium rounded-lg text-base w-full sm:w-auto mt-8 px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enregistrer les modifications</button>
         </form>
 
-        <form class="max-w-screen-md w-1/4-lg px-4 mx-auto p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700" [formGroup]="form" (ngSubmit)="onSubmitForm($event)">
+        <form class="max-w-screen-md w-1/4-lg px-4 mx-auto p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mb-12" [formGroup]="form" (ngSubmit)="onSubmitForm($event)">
             <h3 class="text-xl lato-bold mb-10">Informations générales</h3>
             <div class="relative z-0 w-1/4 mb-7 group">
                 <label for="Civility" class="peer-focus:font-medium absolute text-brown text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Civilité</label>
@@ -48,6 +48,11 @@
             </div>
             <button type="submit" class="btn-cta font-medium rounded-lg text-base w-full sm:w-auto mt-8 px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enregistrer les modifications</button>
         </form>
+
+        <div class="max-w-screen-md w-1/4-lg px-4 mx-auto p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+            <h3 class="text-xl lato-bold mb-10">Suppression du compte</h3>
+            <button type="submit" (click)="deleteEmployeeAccount()" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Supprimer le compte</button>
+        </div>
 
     </div>
 
