@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { EmployeeStatus } from '../entities';
-import { catchError, Observable, throwError } from 'rxjs';
+import { ApiListResponse, EmployeeStatus } from '../entities';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
@@ -13,7 +13,10 @@ export class EmployeeStatusService {
   private apiUrl = environment.apiUrl;
 
   fetchAllEmployeeStatus (): Observable<EmployeeStatus[]> {
-    return this.http.get<EmployeeStatus[]>(`${this.apiUrl}/employee_statuses`);
+    return this.http.get<ApiListResponse<EmployeeStatus>>(`${this.apiUrl}/employee_statuses`).pipe(
+      map(response => response['hydra:member'])
+    );
   }
 
+  
 }

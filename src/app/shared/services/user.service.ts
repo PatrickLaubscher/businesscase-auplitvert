@@ -14,6 +14,10 @@ export class UserService {
 
   user:User|undefined;
 
+  fetchUserLogged (): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/me`);
+  }
+
   fetchOneUserByEmail (email: string): Observable<User|undefined> {
     return this.http.get<any>(`${this.apiUrl}/users?email=${email}`);
   }
@@ -36,7 +40,7 @@ export class UserService {
   }
 
   setUser(user: User): void {
-    return localStorage.setItem('user', JSON.stringify(user));
+    return localStorage.setItem('user', JSON.stringify([user]));
   }
 
   getUser(): User | null {

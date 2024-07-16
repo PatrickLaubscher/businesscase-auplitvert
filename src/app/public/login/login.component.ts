@@ -12,7 +12,7 @@ import { firstValueFrom } from 'rxjs';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
 
@@ -37,7 +37,7 @@ export class LoginComponent {
       try {
         const response = await firstValueFrom(this.auth.login(credentials));
           if(response.token != null) {
-            this.userService.fetchOneUserByEmail(credentials.username).subscribe(
+            this.userService.fetchUserLogged().subscribe(
               data => {
                 if(data) {
                   this.user = data;

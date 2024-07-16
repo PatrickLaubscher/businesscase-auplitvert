@@ -1,3 +1,5 @@
+/* Authentication */
+
 export interface AllowedUrl {
     url: string;
     methods: string[];
@@ -13,6 +15,20 @@ export interface Token {
     refresh_token: string;
 }
 
+
+export interface ApiListResponse<T> extends ApiRessource {
+    '@id': string;
+    'hydra:totalItems': number;
+    'hydra:member': T[];
+}
+
+export interface ApiRessource {
+    '@id': string;
+    id: number;
+}
+
+
+/* Users */
 export interface User {
     roles: string[],
     email: string;
@@ -28,7 +44,6 @@ export interface Admin {
     phone: string,
     email: string,
 }
-
 
 export interface Employee {
     id: string,
@@ -63,7 +78,6 @@ export interface newEmployee {
     creationDate: string
 }
 
-
 export interface Customer {
     civility: Civility,
     firstname: string,
@@ -74,7 +88,6 @@ export interface Customer {
     phone: string,
     creationDate: string
 }
-
 
 export interface newCustomer {
     civility: string,
@@ -111,6 +124,8 @@ export interface EmployeeStatus {
 }
 
 
+/* Services */
+
 export interface Order {
     id: string,
     date: string,
@@ -122,19 +137,36 @@ export interface Order {
 export interface OrderLine {
     id: string,
     product: {name:string},
-    prestation: {name:string},
+    prestation: Prestation,
     order_line_status: {name:string},
     main_order:{id:string},
     qty:number
 }
-
 
 export interface OrderLinesStatus {
     id: string,
     name: string
 }
 
-export interface category {
-    name: string;
+export interface Category {
+    id : number,
+    name: string,
+    coef_price: number
+}
+
+export interface NewCategory {
+    name: string,
+    coef_price: number
+}
+
+export interface Prestation {
+    id: number,
+    name: string,
+    base_price: number
+}
+
+export interface NewPrestation {
+    name: string,
+    base_price: number
 }
 

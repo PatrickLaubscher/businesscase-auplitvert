@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Civility } from '../entities';
+import { ApiListResponse, Civility } from '../entities';
 import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -16,8 +16,9 @@ export class CivilityService {
   civilities:Civility[] = [];
 
   fetchAllCivilities (): Observable<Civility[]> {
-    return this.http.get<Civility[]>(`${this.apiUrl}/civilities`);
+    return this.http.get<ApiListResponse<Civility>>(`${this.apiUrl}/civilities`).pipe(
+      map(response => response['hydra:member'])
+    );
   }
-
 
 }

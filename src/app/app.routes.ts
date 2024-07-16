@@ -12,6 +12,7 @@ import { EmployeeListComponent } from './private/admin/employee-list/employee-li
 import { EmployeeDetailsComponent } from './private/admin/employee-details/employee-details.component';
 import { AddEmployeeComponent } from './private/admin/add-employee/add-employee.component';
 import { OrderListComponent } from './private/admin/order-list/order-list.component';
+import { PrestationListComponent } from './private/admin/prestation-list/prestation-list.component';
 
 
 
@@ -32,6 +33,7 @@ export const routes: Routes = [
                     {path: 'employee/:id', component: EmployeeDetailsComponent},
                     {path: 'add-employee', component: AddEmployeeComponent},
                     {path: 'orders', component: OrderListComponent},
+                    {path: 'prestations', component: PrestationListComponent},
                 ]
             },
         ]

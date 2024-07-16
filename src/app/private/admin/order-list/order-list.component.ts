@@ -30,16 +30,16 @@ export class OrderListComponent implements OnInit{
   }
 
   fetchAllOrders() {
-  this.currentPageData$ = this.currentPage$.pipe(
-    switchMap((currentPage) =>
-      this.orderService.fetchAllOrders(currentPage, this.itemPerPage)
-    ));
-  this.currentPageData$.subscribe({
-    next: () => {},
-    complete: () => {
-      console.log("Liste des commandes chargées")
-    }
-  })
+    this.currentPageData$ = this.currentPage$.pipe(
+      switchMap((currentPage) =>
+        this.orderService.fetchAllOrders(currentPage, this.itemPerPage)
+      ));
+    /*this.currentPageData$.subscribe({
+      next: (data:Order[]) => {data},
+      complete: () => {
+        console.log("Liste des commandes chargées")
+      }
+    })*/
   }
 
   nextPage() {

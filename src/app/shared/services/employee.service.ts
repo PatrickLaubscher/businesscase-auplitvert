@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { Employee, EmployeeStatus, newEmployee } from '../entities';
-import { catchError, Observable, throwError } from 'rxjs';
+import { ApiListResponse, Employee, newEmployee } from '../entities';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { OrderLineService } from './order-line.service';
@@ -19,13 +19,16 @@ export class EmployeeService {
   orderLineService = inject(OrderLineService);
 
   fetchAllEmployees (): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${this.apiUrl}/users?roles=EMPLOYEE`);
+    return this.http.get<ApiListResponse<Employee>>(`${this.apiUrl}/users?roles=EMPLOYEE`).pipe(
+      map(response => response['hydra:member'])
+    );
   }
 
-  fetchOneEmployee (id:string|null): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${this.apiUrl}/users?roles=EMPLOYEE&id=${id}`);
+  fetchOneEmployee (id:string|null): Observable<Employee> {
+    return this.http.get<Employee>(`${this.apiUrl}/users?roles=EMPLOYEE&id=${id}`);
   }
-
+  
+  
   updateStatusEmployee (id:string, idNewStatus:object): Observable<Object|undefined> {
     return this.http.patch<Object>(`${this.apiUrl}/employees/${id}`, idNewStatus,{
       headers: {
