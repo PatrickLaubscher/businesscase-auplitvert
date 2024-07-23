@@ -14,9 +14,9 @@ import { CategoryFormComponent } from "../category-form/category-form.component"
 })
 export class CategoryListComponent {
 
-  categoryService = inject(CategoryService);
+  private categoryService = inject(CategoryService);
 
-  categorylist$!: Observable<Category[]>;
+  public categorylist$!: Observable<Category[]>;
 
 
   ngOnInit(): void {

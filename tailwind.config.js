@@ -9,6 +9,9 @@ module.exports = {
       colors: {
         yellow: {
           var: '#F2DC5D'
+        },
+        brown1: {
+          var: '#2C0014'
         }
       } 
     },

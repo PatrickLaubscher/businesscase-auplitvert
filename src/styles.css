@@ -8,7 +8,7 @@
     --red: #66012E;
     --brown: #2C0014;
     --brown2: #BFACB0;
-
+    --brown3: #F6EBE1;
 }
 
 
@@ -58,6 +58,10 @@
 
 .bg-brown {
     background-color: var(--brown2);
+}
+
+.bg-brown2 {
+    background-color: var(--brown3);
 }
 
 .bg-logo {

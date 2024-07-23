@@ -13,6 +13,9 @@ import { EmployeeDetailsComponent } from './private/admin/employee-details/emplo
 import { AddEmployeeComponent } from './private/admin/add-employee/add-employee.component';
 import { OrderListComponent } from './private/admin/order-list/order-list.component';
 import { PrestationListComponent } from './private/admin/prestation-list/prestation-list.component';
+import { ProductListComponent } from './private/admin/product-list/product-list.component';
+import { OrderLineListComponent } from './private/admin/order-line-list/order-line-list.component';
+import { OrderProcessLandingPageComponent } from './public/order-process/order-process-landing-page/order-process-landing-page.component';
 
 
 
@@ -22,6 +25,7 @@ export const routes: Routes = [
             {path: '', component: HomepageComponent},
             {path: 'login', component: LoginComponent},
             {path: 'inscription', component: SubscriptionComponent},
+            {path: 'faire-un-dépot', component:OrderProcessLandingPageComponent}
         ]
     },
     {path: 'espace-prive', component: PrivateLayoutComponent, canActivate:[authGuard],
@@ -29,11 +33,13 @@ export const routes: Routes = [
             {path: 'admin', component: AdminDashboardComponent, canActivate:[adminGuard], 
                 children: [
                     {path: '', component: AdminHomeComponent},
-                    {path: 'employees', component: EmployeeListComponent},
+                    {path: 'employes', component: EmployeeListComponent},
                     {path: 'employee/:id', component: EmployeeDetailsComponent},
-                    {path: 'add-employee', component: AddEmployeeComponent},
-                    {path: 'orders', component: OrderListComponent},
-                    {path: 'prestations', component: PrestationListComponent},
+                    {path: 'ajouter-employe', component: AddEmployeeComponent},
+                    {path: 'commandes', component: OrderListComponent},
+                    {path: 'ligne-de-commandes', component: OrderLineListComponent},
+                    {path: 'prestations-et-catégories', component: PrestationListComponent},
+                    {path: 'articles', component: ProductListComponent}
                 ]
             },
         ]
