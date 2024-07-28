@@ -1,7 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../../shared/services/category.service';
-import { Category } from '../../../shared/entities';
+import { Category, PatchCategory } from '../../../shared/entities';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -55,7 +55,7 @@ export class CategoryFormComponent {
 
   onSubmit() {
     if(this.form.valid) { 
-      const category:Category = {
+      const category:PatchCategory = {
         id : this.idCategory,
         name : this.form.value.name,
         coef_price : parseInt(this.form.value.coef_price)

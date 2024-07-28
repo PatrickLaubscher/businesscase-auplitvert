@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrderProcessLandingPageComponent } from './order-process-landing-page.component';
+import { OrderProcessSelectionComponent } from './order-process-selection.component';
 
 describe('OrderProcessLandingPageComponent', () => {
-  let component: OrderProcessLandingPageComponent;
-  let fixture: ComponentFixture<OrderProcessLandingPageComponent>;
+  let component: OrderProcessSelectionComponent;
+  let fixture: ComponentFixture<OrderProcessSelectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrderProcessLandingPageComponent]
+      imports: [OrderProcessSelectionComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OrderProcessLandingPageComponent);
+    fixture = TestBed.createComponent(OrderProcessSelectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

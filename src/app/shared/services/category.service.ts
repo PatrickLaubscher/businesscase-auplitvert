@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { ApiListResponse, Category, NewCategory } from '../entities';
+import { ApiListResponse, Category, NewCategory, PatchCategory } from '../entities';
 
 
 @Injectable({
@@ -24,9 +24,9 @@ export class CategoryService {
     return this.http.get<Category>(`${this.apiUrl}/categories/${idParam}`);
   }
 
-  updateCategory (id:number, category:Category): Observable<Category> {
+  updateCategory (id:number, category:PatchCategory): Observable<PatchCategory> {
     let idParam = id?.toString();
-    return this.http.patch<Category>(`${this.apiUrl}/categories/${idParam}`, category,{
+    return this.http.patch<PatchCategory>(`${this.apiUrl}/categories/${idParam}`, category,{
       headers: {
         'Content-Type': 'application/merge-patch+json'
       }

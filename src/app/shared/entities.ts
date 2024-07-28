@@ -16,20 +16,21 @@ export interface Token {
 }
 
 
-export interface ApiListResponse<T> extends ApiRessource {
+export interface ApiListResponse<T> {
     '@id': string;
     'hydra:totalItems': number;
     'hydra:member': T[];
 }
 
-export interface ApiRessource {
+export interface ApiRessource<T> {
     '@id': string;
-    id: number;
+    'hydra:member': T[];
 }
 
 
 /* Users */
 export interface User {
+    id: number;
     roles: string[];
     email: string;
     firstname: string;
@@ -46,7 +47,7 @@ export interface Admin {
 }
 
 export interface Employee {
-    id: string;
+    id: number;
     civility: Civility;
     firstname: string;
     lastname: string;
@@ -104,22 +105,22 @@ export interface newCustomer {
 }
 
 
-export interface Civility{
-    id: string;
+export interface Civility {
+    id: number;
     name: string;
     abreviation: string;
 }
 
 
 export interface City {
-    id: string;
+    id: number;
     name: string;
     zip_code: string;
 }
 
 
 export interface EmployeeStatus {
-    id: string;
+    id: number;
     name: string;
 }
 
@@ -127,9 +128,10 @@ export interface EmployeeStatus {
 /* Category & products */
 
 export interface Category {
-    id : number;
+    id: number;
     name: string;
     coef_price: number;
+    products: Product[];
 }
 
 export interface NewCategory {
@@ -137,20 +139,30 @@ export interface NewCategory {
     coef_price: number;
 }
 
-export interface Product extends ApiRessource {
+export interface PatchCategory {
+    id: number;
+    name: string;
+    coef_price: number;
+}
+
+export interface Product {
+    id: number;
     name: string;
     category: Category;
+    coef_price: number;
 }
 
 export interface NewProduct {
     name: string;
     category: string;
+    coef_price: number;
 }
 
 export interface PatchProduct {
     id: number;
     name: string;
     category: string;
+    coef_price: number;
 }
 
 
@@ -163,58 +175,87 @@ export interface Prestation {
     base_price: number;
 }
 
+export interface PrestationWithAttribution {
+    id: number;
+    name: string;
+    base_price: number;
+    attributionPrestationCategories: AttributionPrestationCategory[];
+}
+
 export interface NewPrestation {
+    name: string;
+    base_price: number;
+}
+
+export interface AttributionPrestationCategory {
+    prestation: string;
+    Category: Category[];
+}
+
+
+export interface PatchPrestation {
+    id: number;
     name: string;
     base_price: number;
 }
 
 
 
+
 /* Orders */
 
 export interface Order {
-    id: string;
+    id: number;
     date: string;
     orderLines: OrderLine[];
     customer: Customer;
 }
 
-export interface newOrder {
+export interface NewOrder {
     date: string;
-    orderLines: OrderLine[];
-    customer: Customer;
+    customer: string;
+    paymentMode: string;
 }
 
 
-export interface OrderLine extends ApiRessource {
+export interface OrderLine {
+    id: number;
     product: Product;
     prestation: Prestation;
-    order_line_status: OrderLinesStatus;
+    order_line_status: OrderLineStatus;
     main_order: Order;
     qty: number;
     employee: Employee;
 }
 
 export interface NewOrderLine {
-    product: {name:string};
+    main_order: string;
+    product: string;
+    prestation: string;
+    order_line_status: string;
+    qty: number;
+    price: number;
+}
+
+
+export interface OrderLineStatus {
+    id: number;
+    name: string;
+}
+
+
+export interface CartLineOrder {
+    product: Product;
+    category: Category;
     prestation: Prestation;
-    order_line_status: {name:string};
-    main_order:{id:string};
-    qty:number;
-}
-
-
-export interface OrderLinesStatus {
-    id: string;
-    name: string;
-}
-
-
-export interface CartItem {
-    productId: number;
-    name: string;
     quantity: number;
     unitPrice: number;
     totalPrice: number;  
 };
+
+
+export interface PaymentMode {
+    id: number;
+    name: string;
+}
 

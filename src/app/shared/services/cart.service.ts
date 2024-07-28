@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CartItem, Fruit } from '../entities';
+import { CartLineOrder, Category, NewOrderLine, PrestationWithAttribution, Product } from '../entities';
 
 
 
@@ -8,25 +8,20 @@ import { CartItem, Fruit } from '../entities';
 })
 export class CartService {
 
-  items:CartItem[] = [];
+  items:CartLineOrder[] = [];
 
   totalNetPriceCart:number = 0;
   totalQty:number = 0;
 
-  addToCart(product: Fruit) {
+  addToCart(prestation: PrestationWithAttribution, product: Product, category:Category, qty:number) {
 
-    let addedQty:number;
-    if (product.quantite === 0) {
-      addedQty = 1;
-    } else {
-      addedQty = product.quantite;
-    }
-    let cartItem:CartItem = {
-      productId: product.id,
-      name: product.nom,
-      quantity: addedQty,
-      unitPrice : product.prixHT,
-      totalPrice: product.prixHT * addedQty
+    let cartItem:CartLineOrder = {
+      product: product,
+      category: category,
+      prestation: prestation,
+      quantity: qty,
+      unitPrice : prestation.base_price * category.coef_price,
+      totalPrice: prestation.base_price * category.coef_price * qty
     };
 
     let itemExists = false;
@@ -35,7 +30,7 @@ export class CartService {
       let existingItems = [];
       existingItems = JSON.parse(localStorage.getItem('cart_items') || '');
       for (let existingItem of existingItems) {
-        if(existingItem.productId === cartItem.productId) {
+        if(existingItem.product.id === cartItem.product.id && existingItem.prestation.id === cartItem.prestation.id) {
           itemExists = true;
           existingItem.quantity += cartItem.quantity;
           existingItem.totalPrice += cartItem.totalPrice;
@@ -54,25 +49,25 @@ export class CartService {
     this.saveCart();
     this.saveTotalNetPrice();
     this.saveTotalQty();
-    location.reload();
   }
 
   getItems() {
     return this.items;
   } 
 
-  loadCart(): void {
+  loadCart(): CartLineOrder[] {
     const cartItems = localStorage.getItem("cart_items");
     if(cartItems) {
       try {
         this.items = JSON.parse(cartItems);
       } catch (error) {
         console.log('Erreur dans le chargement du panier');
-        this.items =  [];
+        this.items = [];
       }
     } else {
-      this.items =  [];
+      this.items = [];
     }
+    return this.items;
   }
 
   saveCart(): void {
@@ -82,10 +77,12 @@ export class CartService {
   clearCart() {
     this.items = [];
     localStorage.removeItem("cart_items");
+    this.clearTotalQty();
+    this.clearTotalNetPrice();
   }
 
-  removeItem(cartItem:CartItem) {
-    const index = this.items.findIndex(o => o.productId === cartItem.productId);
+  removeItem(cartItem:CartLineOrder) {
+    const index = this.items.findIndex(o => o.product.id === cartItem.product.id);
     if (index > -1) {
       this.items.splice(index, 1);
       this.saveCart();
@@ -101,15 +98,15 @@ export class CartService {
     }
   }
 
-  totalItemPrice(cartItem:CartItem) {
+  totalItemPrice(cartItem:CartLineOrder) {
     cartItem.totalPrice = cartItem.quantity * cartItem.unitPrice;
   }
 
-  addQtyItem(cartItem:CartItem) {
+  addQtyItem(cartItem:CartLineOrder) {
     let existingItems = [];
       existingItems = JSON.parse(localStorage.getItem('cart_items') || '');
       for (let existingItem of existingItems) {
-        if(existingItem.productId === cartItem.productId) {
+        if(existingItem.product.id === cartItem.product.id && existingItem.prestation.id === cartItem.prestation.id) {
           existingItem.quantity ++
           this.totalItemPrice(existingItem);
         } 
@@ -120,11 +117,11 @@ export class CartService {
     this.saveTotalQty();
   }
 
-  diminishQtyItem(cartItem:CartItem) {
+  diminishQtyItem(cartItem:CartLineOrder) {
     let existingItems = [];
       existingItems = JSON.parse(localStorage.getItem('cart_items') || '');
       for (let existingItem of existingItems) {
-        if(existingItem.productId === cartItem.productId) {
+        if(existingItem.product.id === cartItem.product.id && existingItem.prestation.id === cartItem.prestation.id) {
           if(existingItem.quantity <= 1) {
             existingItem.quantity = 1;
             existingItem.totalPrice = existingItem.unitPrice;
@@ -141,8 +138,8 @@ export class CartService {
   }
 
 
-  itemInCart(cartItem: CartItem): boolean {
-    return this.items.findIndex(o => o.productId === cartItem.productId) > -1;
+  itemInCart(cartItem: CartLineOrder): boolean {
+    return this.items.findIndex(o => o.product.id === cartItem.product.id) > -1;
   }
 
 
@@ -155,7 +152,6 @@ export class CartService {
       for (let existingItem of existingItems) {
         this.totalQty += existingItem.quantity;
       }
-      console.log(this.totalQty);
   }
 
   saveTotalQty(): void {

@@ -25,9 +25,9 @@ export class HeaderComponent implements AfterViewInit {
       if(this.userService.getRoles()?.includes('ROLE_ADMIN')){
         this.role = "admin";
       } else if (this.userService.getRoles()?.includes('ROLE_EMPLOYEE')){
-        this.role = "employee";
+        this.role = "employe";
       } else if (this.userService.getRoles()?.includes('ROLE_CUSTOMER')){
-        this.role = "customer";
+        this.role = "client";
       }
       this.cdr.detectChanges();
     })

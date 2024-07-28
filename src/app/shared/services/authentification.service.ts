@@ -55,6 +55,9 @@ export class AuthentificationService {
   }
 
   setRefreshToken(refreshToken: string):void  {
+    if(this.getRefreshToken()) {
+      localStorage.removeItem('refreshToken');
+    }
     return localStorage.setItem('refreshToken', refreshToken);
   }
 

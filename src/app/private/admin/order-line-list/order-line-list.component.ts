@@ -26,7 +26,7 @@ export class OrderLineListComponent {
   fetchAllOrderLines() {
     this.currentPageData$ = this.currentPage$.pipe(
       switchMap((currentPage) =>
-        this.orderLineService.fetchAllOrderLines(currentPage, this.itemPerPage)
+        this.orderLineService.fetchAllOrderLinesPaginate(currentPage, this.itemPerPage)
     ));
   }
 

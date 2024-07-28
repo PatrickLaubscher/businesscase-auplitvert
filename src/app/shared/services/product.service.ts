@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { ApiListResponse, NewProduct, PatchProduct, Product } from '../entities';
+import { ApiListResponse, NewProduct, PatchProduct, PrestationWithAttribution, Product } from '../entities';
 
 
 @Injectable({
@@ -19,7 +19,7 @@ export class ProductService {
     );
   }
 
-  fetchOneProduct (id:number|null): Observable<Product> {
+  fetchOneProduct (id:  number|null): Observable<Product> {
     let idParam = id?.toString();
     return this.http.get<Product>(`${this.apiUrl}/products/${idParam}`);
   }

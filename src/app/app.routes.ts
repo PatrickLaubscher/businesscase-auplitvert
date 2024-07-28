@@ -15,7 +15,14 @@ import { OrderListComponent } from './private/admin/order-list/order-list.compon
 import { PrestationListComponent } from './private/admin/prestation-list/prestation-list.component';
 import { ProductListComponent } from './private/admin/product-list/product-list.component';
 import { OrderLineListComponent } from './private/admin/order-line-list/order-line-list.component';
-import { OrderProcessLandingPageComponent } from './public/order-process/order-process-landing-page/order-process-landing-page.component';
+import { OrderProcessSelectionComponent } from './public/order-process/order-process-selection/order-process-selection.component';
+import { CartComponent } from './public/order-process/cart/cart.component';
+import { PaymentSelectionComponent } from './public/order-process/payment-selection/payment-selection.component';
+import { customerGuard } from './shared/customer.guard';
+import { CustomerDashboardComponent } from './private/customer/customer-dashboard/customer-dashboard.component';
+import { CustomerHomeComponent } from './private/customer/customer-home/customer-home.component';
+import { OrderConfirmationComponent } from './public/order-process/order-confirmation/order-confirmation.component';
+import { AttributionOrderComponent } from './private/admin/attribution-order/attribution-order.component';
 
 
 
@@ -25,7 +32,10 @@ export const routes: Routes = [
             {path: '', component: HomepageComponent},
             {path: 'login', component: LoginComponent},
             {path: 'inscription', component: SubscriptionComponent},
-            {path: 'faire-un-dépot', component:OrderProcessLandingPageComponent}
+            {path: 'faire-un-dépot', component:OrderProcessSelectionComponent},
+            {path: 'panier', component:CartComponent},
+            {path: 'paiement', component: PaymentSelectionComponent},
+            {path: 'confirmation-commande', component: OrderConfirmationComponent}
         ]
     },
     {path: 'espace-prive', component: PrivateLayoutComponent, canActivate:[authGuard],
@@ -39,7 +49,13 @@ export const routes: Routes = [
                     {path: 'commandes', component: OrderListComponent},
                     {path: 'ligne-de-commandes', component: OrderLineListComponent},
                     {path: 'prestations-et-catégories', component: PrestationListComponent},
-                    {path: 'articles', component: ProductListComponent}
+                    {path: 'articles', component: ProductListComponent},
+                    {path: 'attribution-commandes', component: AttributionOrderComponent}
+                ]
+            },
+            {path: 'client', component: CustomerDashboardComponent, canActivate:[customerGuard], 
+                children: [
+                    {path: '', component: CustomerHomeComponent}
                 ]
             },
         ]

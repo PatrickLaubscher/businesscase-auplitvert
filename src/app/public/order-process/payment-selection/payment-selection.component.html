@@ -1,0 +1,49 @@
+<section>
+    <div class="container max-w-screen-xl mx-auto">
+    
+        <div class="mt-10 mb-32 mx-auto w-full">
+            <h1 class="mx-auto mb-32 px-4 angkor-regular text-2xl text-brown">Choisir un mode de paiement</h1>
+
+            <div class="px-4">
+                <a routerLink="/panier" class="btn text-sm btn-cta inline-flex gap-2 md:text-xl px-4 py-1 mb-8 rounded-md lato-bold cursor-pointer">
+                    <svg class="w-6 h-6 text-brown dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                      </svg>
+                      Revenir au panier
+                </a>
+            </div>    
+                   
+            <div class="mx-auto">
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="flex flex-col md:flex-row flex-wrap justify-center gap-14 bg-brown2 rounded-lg">
+                        <legend class="sr-only">Mode de paiement</legend>
+                        @for (paymentMode of paymentModeList$ | async; track paymentMode ) {
+                        <div class="flex flex-col items-center space-y-8  mb-4 p-20">
+                            <label for="paymentMode" class="text-2xl lato-bold text-brown1-var dark:text-gray-300">
+                                {{paymentMode.name}}
+                            </label>
+                            <input type="radio" formControlName="paymentMode" name="paymentMode" value="{{paymentMode.id}}" class="w-4 h-4 border-gray-300 focus:ring-brown1-var focus:bg-brown1-var checked:bg-brown1-var dark:focus:bg-border-brown1-var dark:focus:bg-brown1-var dark:bg-gray-700 dark:border-gray-600">
+                        </div>
+                        }
+                    </div>
+                    <button type="submit" [disabled]="form.invalid" class="btn btn-cta block mx-auto text-sm md:text-xl mt-12 px-4 py-2 rounded-md lato-bold">Valider votre commande</button>
+                </form>
+                
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+    
+
+  </section>
+  
+
+
+
+
+

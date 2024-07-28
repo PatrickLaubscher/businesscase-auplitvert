@@ -62,7 +62,7 @@ export class AddEmployeeComponent implements OnInit {
   findActiveStatusId(): void {
     const activeStatus = this.employeeStatus.find(status => status.name === 'Actif');
     if (activeStatus) {
-      this.idActiveStatus = activeStatus.id;
+      this.idActiveStatus = activeStatus.id.toString();
     } else {
       console.error('Statut "Actif" non trouvé');
     }
@@ -88,7 +88,7 @@ export class AddEmployeeComponent implements OnInit {
   
       this.employeeService.addNewEmployee(newEmployee).subscribe({    
         next: () => {console.log('Le compte de l\'employé(e) a bien été créé'),
-          this.router.navigateByUrl('/espace-prive/admin/employees');
+          this.router.navigateByUrl('/espace-prive/admin/employes');
          },
         error: (error) => console.error('Il y a eu une erreur dans la création du compte'),
       });

@@ -28,7 +28,8 @@ export class ProductFormComponent {
 
   form: FormGroup = new FormGroup({
     name: new FormControl('', {validators: [Validators.required]}),
-    category: new FormControl('', {validators: [Validators.required]})
+    category: new FormControl('', {validators: [Validators.required]}),
+    coef_price: new FormControl('', {validators: [Validators.required]})
     }, 
   )
 
@@ -67,7 +68,8 @@ export class ProductFormComponent {
       const product:PatchProduct = {
         id : this.idProduct,
         name : this.form.value.name,
-        category : 'api/categories/' + this.form.value.category
+        category : 'api/categories/' + this.form.value.category,
+        coef_price: this.form.value.coef_price
       };
       this.form.reset();
 

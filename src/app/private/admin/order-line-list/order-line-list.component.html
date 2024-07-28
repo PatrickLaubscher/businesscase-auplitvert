@@ -9,8 +9,11 @@
                     <div class="md:w-1/3 w-100">
                         <h3 class="bg-yellow-var rounded-md w-fit px-1 text-brown text-sm lato-bold mb-1">Ref cde N°{{ orderLine.main_order.id }}</h3>
                         <p class="bg-yellow-var rounded-md w-fit px-1 text-brown text-sm lato-bold">- {{ orderLine.main_order.date| date:'dd/MM/yyyy' }} -</p>
-                        <p class="text-brown text-sm lato-bold"><span class="underline">Employé</span>: 
+                        <p *ngIf="orderLine.employee" class="text-brown text-sm lato-bold"><span class="underline">Employé</span>: 
                             {{ orderLine.employee.firstname }}    
+                        </p>
+                        <p *ngIf="!orderLine.employee" class="text-brown text-sm lato-bold">
+                            Commande non attribuée
                         </p>
                     </div>
                     <div class="md:w-1/3 w-100">

@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { ApiListResponse, Employee, newEmployee } from '../entities';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { OrderLineService } from './order-line.service';
 
@@ -15,6 +15,9 @@ export class EmployeeService {
 
   private http = inject(HttpClient);
   private apiUrl = environment.apiUrl;
+  private headers = new HttpHeaders({
+    'Content-Type': 'application/ld+json'
+  });
 
   orderLineService = inject(OrderLineService);
 
@@ -43,7 +46,7 @@ export class EmployeeService {
   }
 
   addNewEmployee(newEmployee: newEmployee): Observable<newEmployee> {
-    return this.http.post<newEmployee>(`${this.apiUrl}/employees`, newEmployee).pipe(
+    return this.http.post<newEmployee>(`${this.apiUrl}/employees`, newEmployee, {'headers': this.headers}).pipe(
       catchError((error) => {
         console.error('Erreur lors de la création de votre compte', error);
         return throwError(() => error);

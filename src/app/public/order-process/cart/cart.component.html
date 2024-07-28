@@ -1,1 +1,131 @@
-<p>cart works!</p>
+<section>
+    <div class="container max-w-screen-xl mx-auto">
+    
+        <div class="mt-10 mb-32 mx-auto w-full">
+            <h1 class="mx-auto mb-32 px-4 angkor-regular text-2xl text-brown">Panier</h1>
+
+            <div class="px-4">
+                <button type="button" class="btn text-sm btn-cta inline-flex gap-2 md:text-xl px-4 py-1 mb-8 rounded-md lato-bold" (click)="goToSelectPage()">
+                    <svg class="w-6 h-6 text-brown dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                      </svg>
+                      Rajouter une prestation
+                </button>
+            </div>    
+                <div *ngIf="cartItems.length > 0">
+                    
+
+            <div class="relative overflow-x-auto">
+                <table class="w-full md:text-xl text-sm text-center rtl:text-right bg-brown2 dark:text-gray-400">
+                    <thead class="md:text-base text-xs lato-bold text-brown1-var uppercase bg-brown2 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="px-6 py-3">#</th>
+                            <th scope="col" class="px-6 py-3">
+                                Article
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Quantité
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Catégorie
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Prestation
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Prix net
+                            </th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-template ngFor let-cartItem [ngForOf]="cartItems" let-i=index>
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 lato-semibold">
+                                <th class="px-6 py-4">{{i+1}}</th>
+                                <th scope="row" class="px-6 py-4 lato-bold text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ cartItem.product.name }}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ cartItem.quantity }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ cartItem.category.name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ cartItem.prestation.name }}
+                                </td>
+                                <td class="px-6 py-4">{{ cartItem.totalPrice | currency:'EUR' }}</td>
+                                <td>
+                                    <button type="button" class="btn-cta text-brown1-var lato-bold rounded-md px-2 py-1" (click)="cartService.addQtyItem(cartItem)">+</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn-cta text-brown1-var lato-bold rounded-md px-2 py-1" (click)="cartService.diminishQtyItem(cartItem)">-</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn-cta text-brown1-var lato-bold rounded-md px-2 py-1" (click)="cartService.removeItem(cartItem)">X</button>
+                                </td>
+                            </tr>
+                        </ng-template>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex flex-col items-end gap-8">
+                <table class="w-2/3 md:w-1/2 mt-11 md:text-xl text-xs text-center rtl:text-right text-brown1-var dark:text-gray-400">
+                    <thead class="md:text-base text-xs lato-bold text-brown1-var uppercase bg-brown2 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Total Qté
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Total net HT
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Total TTC
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr class="bg-white lato-bold border-b dark:bg-gray-800 dark:border-gray-700">
+                                <td class="px-6 py-4">
+                                    {{ totalQty }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ totalNetPrice | currency:'EUR' }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ totalNetPrice | ttcPrice:2 | currency:'EUR' }}
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+                <a routerLink="/paiement"  class="btn btn-cta px-4 text-sm md:text-xl py-1 rounded-md lato-bold">Valider le panier</a>
+
+            </div>
+
+
+            </div>
+
+            <div>
+                <button type="button" class="btn text-sm underline md:text-xl px-4 py-1 rounded-md lato-bold" (click)="cartService.clearCart()">Vider le panier</button>
+            </div>                        
+
+
+
+
+
+        </div>
+    </div>
+    
+
+  </section>
+  
+
+
+
+

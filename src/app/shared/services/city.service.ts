@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { City } from '../entities';
+import { ApiListResponse, City } from '../entities';
 import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -16,7 +16,9 @@ export class CityService {
   cities:City[] = [];
 
   fetchAllCities (): Observable<City[]> {
-    return this.http.get<City[]>(`${this.apiUrl}/cities`);
+    return this.http.get<ApiListResponse<City>>(`${this.apiUrl}/cities`).pipe(
+      map(response => response['hydra:member'])
+    );
   }
 
 }

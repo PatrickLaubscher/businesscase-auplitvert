@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { ApiListResponse, NewPrestation, Prestation } from '../entities';
+import { ApiListResponse, NewPrestation, PatchPrestation, Prestation, PrestationWithAttribution } from '../entities';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -13,21 +13,28 @@ export class PrestationService {
   private http = inject(HttpClient);
   private apiUrl = environment.apiUrl;
 
+
   fetchAllPrestation (): Observable<Prestation[]> {
     return this.http.get<ApiListResponse<Prestation>>(`${this.apiUrl}/prestations`).pipe(
       map(response => response['hydra:member'])
     );
   }
 
+  fetchAllPrestationWithAttribution (): Observable<PrestationWithAttribution[]> {
+    return this.http.get<ApiListResponse<PrestationWithAttribution>>(`${this.apiUrl}/prestations`).pipe(
+      map(response => response['hydra:member'])
+    );
+  }
   
+
   fetchOnePrestation (id:number|null): Observable<Prestation> {
     let idParam = id?.toString();
     return this.http.get<Prestation>(`${this.apiUrl}/prestations/${idParam}`);
   }
 
-  updatePrestation (id:number, prestation:Prestation): Observable<Prestation> {
+  updatePrestation (id:number, prestation:PatchPrestation): Observable<PatchPrestation> {
     let idParam = id?.toString();
-    return this.http.patch<Prestation>(`${this.apiUrl}/prestations/${idParam}`, prestation,{
+    return this.http.patch<PatchPrestation>(`${this.apiUrl}/prestations/${idParam}`, prestation,{
       headers: {
         'Content-Type': 'application/merge-patch+json'
       }

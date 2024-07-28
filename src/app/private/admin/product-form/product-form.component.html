@@ -30,6 +30,10 @@
                           }
                         </select>
                     </div>
+                    <div class="mb-5">
+                        <label for="coef_price" class="block mb-2 text-base lato-bold text-brown dark:text-white">Coefficient de prix</label>
+                        <input formControlName="coef_price" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-900 focus:border-green-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required />
+                      </div>
                     <div class="flex justify-center my-8">
                         <button type="submit" [disabled]="form.invalid" class="btn-cta hover:cursor-pointer font-medium rounded-lg text-base w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" (click)="hideModal(i)">Modifier l'article</button>
                     </div>

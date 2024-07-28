@@ -2,7 +2,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PrestationService } from '../../../shared/services/prestation.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Prestation } from '../../../shared/entities';
+import { PatchPrestation, Prestation } from '../../../shared/entities';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -55,7 +55,7 @@ export class PrestationFormComponent implements OnInit {
 
   onSubmit() {
     if(this.form.valid) { 
-      const prestation:Prestation = {
+      const prestation:PatchPrestation = {
         id : this.idPrestation,
         name : this.form.value.name,
         base_price : parseInt(this.form.value.base_price)
