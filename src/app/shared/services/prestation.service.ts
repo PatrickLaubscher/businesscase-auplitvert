@@ -32,6 +32,12 @@ export class PrestationService {
     return this.http.get<Prestation>(`${this.apiUrl}/prestations/${idParam}`);
   }
 
+  fetchOnePrestationWithAttribution (id:number|null): Observable<PrestationWithAttribution> {
+    let idParam = id?.toString();
+    return this.http.get<PrestationWithAttribution>(`${this.apiUrl}/prestations/${idParam}`);
+  }
+
+
   updatePrestation (id:number, prestation:PatchPrestation): Observable<PatchPrestation> {
     let idParam = id?.toString();
     return this.http.patch<PatchPrestation>(`${this.apiUrl}/prestations/${idParam}`, prestation,{

@@ -3,7 +3,7 @@ import { PrestationService } from '../../../shared/services/prestation.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Prestation } from '../../../shared/entities';
+import { Prestation, PrestationWithAttribution } from '../../../shared/entities';
 import { CategoryListComponent } from '../category-list/category-list.component';
 import { AddPrestationComponent } from "../add-prestation/add-prestation.component";
 import { PrestationFormComponent } from "../prestation-form/prestation-form.component";
@@ -23,7 +23,7 @@ export class PrestationListComponent {
   //constructor(private service: EntityService<Prestation>) {}
 
   prestationService = inject(PrestationService);
-  prestationlist$!: Observable<Prestation[]>;
+  prestationlist$!: Observable<PrestationWithAttribution[]>;
 
   //prestations: Prestation[] = [];
 
@@ -36,7 +36,7 @@ export class PrestationListComponent {
   }
 
   fetchAllPrestation() {
-    this.prestationlist$ = this.prestationService.fetchAllPrestation();
+    this.prestationlist$ = this.prestationService.fetchAllPrestationWithAttribution();
   }
 
   /*

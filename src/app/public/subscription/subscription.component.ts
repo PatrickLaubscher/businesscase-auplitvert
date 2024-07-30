@@ -39,6 +39,7 @@ export class SubscriptionComponent implements OnInit {
     password: new FormControl('', {validators: [Validators.required, Validators.minLength(4)]}),
     password_confirmation: new FormControl('', {validators: [Validators.required]}),
     phone: new FormControl('', {validators: [Validators.required]}),
+    role: new FormControl('', {validators: [Validators.required]})
     }, {validators: confirmPasswordValidator},
   );
 
@@ -54,13 +55,21 @@ export class SubscriptionComponent implements OnInit {
   onSubmit() {
     if(this.form.valid) { 
       const date = new Date();
+
+      let discr = '';
+      if(this.form.value.role === 'ROLE_CUSTOMER') {
+        discr = 'customer';
+      } else if (this.form.value.role === 'ROLE_ADMIN') {
+        discr = 'admin';
+      } 
+
       const newCustomer:newCustomer = {
         address: this.form.value.address,
         city: 'api/cities/' + this.form.value.city,
         creationDate: date.toISOString(),
-        discr: 'customer',
+        discr: discr,
         email : this.form.value.email,
-        roles: ['ROLE_CUSTOMER'],
+        roles: [this.form.value.role],
         password : this.form.value.password,
         lastname: this.form.value.lastname,
         firstname : this.form.value.firstname,

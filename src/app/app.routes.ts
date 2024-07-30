@@ -23,6 +23,10 @@ import { CustomerDashboardComponent } from './private/customer/customer-dashboar
 import { CustomerHomeComponent } from './private/customer/customer-home/customer-home.component';
 import { OrderConfirmationComponent } from './public/order-process/order-confirmation/order-confirmation.component';
 import { AttributionOrderComponent } from './private/admin/attribution-order/attribution-order.component';
+import { EmployeeDashboardComponent } from './private/employee/employee-dashboard/employee-dashboard.component';
+import { employeeGuard } from './shared/employee.guard';
+import { EmployeeHomeComponent } from './private/employee/employee-home/employee-home.component';
+import { AddAdminComponent } from './public/add-admin-DEV/add-admin.component';
 
 
 
@@ -51,6 +55,11 @@ export const routes: Routes = [
                     {path: 'prestations-et-catégories', component: PrestationListComponent},
                     {path: 'articles', component: ProductListComponent},
                     {path: 'attribution-commandes', component: AttributionOrderComponent}
+                ]
+            },
+            {path: 'employe', component: EmployeeDashboardComponent, canActivate:[employeeGuard], 
+                children: [
+                    {path: '', component: EmployeeHomeComponent}
                 ]
             },
             {path: 'client', component: CustomerDashboardComponent, canActivate:[customerGuard], 

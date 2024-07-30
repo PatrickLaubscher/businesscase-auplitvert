@@ -58,10 +58,10 @@ export class CategoryFormComponent {
       const category:PatchCategory = {
         id : this.idCategory,
         name : this.form.value.name,
-        coef_price : parseInt(this.form.value.coef_price)
+        coef_price : this.form.value.coef_price
       };
       this.form.reset();
-      this.router.navigateByUrl('/espace-prive/admin/prestations');
+      this.router.navigateByUrl('/espace-prive/admin/prestations-et-catégories');
   
       this.categoryService.updateCategory(this.idCategory, category).subscribe({    
         next: () => {console.log('La catégorie a bien été modifiée')

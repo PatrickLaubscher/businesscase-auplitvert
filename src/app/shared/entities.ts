@@ -18,12 +18,16 @@ export interface Token {
 
 export interface ApiListResponse<T> {
     '@id': string;
+    '@type': string;
+    '@context': string;
     'hydra:totalItems': number;
     'hydra:member': T[];
 }
 
 export interface ApiRessource<T> {
     '@id': string;
+    '@type': string;
+    '@context': string;
     'hydra:member': T[];
 }
 
@@ -39,12 +43,33 @@ export interface User {
 
 
 export interface Admin {
+    id: number;
+    civility: Civility;
+    firstname: string;
+    lastname: string;
+    phone: string;
+    email: string;
+}
+
+export interface newAdmin {
+    civility: string;
+    firstname: string;
+    lastname: string;
+    phone: string;
+    email: string;
+    password: string;
+    roles: string[];
+    discr: string;
+}
+
+export interface patchAdmin {
     civility: string;
     firstname: string;
     lastname: string;
     phone: string;
     email: string;
 }
+
 
 export interface Employee {
     id: number;
@@ -104,6 +129,16 @@ export interface newCustomer {
     creationDate: string;
 }
 
+export interface patchCustomer {
+    civility: string;
+    firstname: string;
+    lastname: string;
+    address: string;
+    city: string;
+    phone: string;
+    email: string;
+}
+
 
 export interface Civility {
     id: number;
@@ -132,6 +167,7 @@ export interface Category {
     name: string;
     coef_price: number;
     products: Product[];
+    attributionPrestationCategories : {Prestation : Prestation[]}[];   
 }
 
 export interface NewCategory {
@@ -188,6 +224,7 @@ export interface NewPrestation {
 }
 
 export interface AttributionPrestationCategory {
+    id: number;
     prestation: string;
     Category: Category[];
 }

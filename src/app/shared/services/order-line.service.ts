@@ -48,13 +48,11 @@ export class OrderLineService {
     );
   }
 
-
   fetchOrderLineByStatusAndEmployee(firstname: string, status:string): Observable<OrderLine[]> {
     return this.http.get<ApiListResponse<OrderLine>>(`${this.apiUrl}/order_lines/?employee.firstname=${firstname}&order_line_status.name=${status}`).pipe(
       map(response => response['hydra:member'])
     );;
   }
-
 
   updateOrderLine (id:number, orderLine:OrderLine): Observable<OrderLine> {
     let idParam = id?.toString();
@@ -69,6 +67,41 @@ export class OrderLineService {
       })
     )
   }
+  
+  updateOrderLineStatus (id:number, statusId:number): Observable<OrderLine> {
+    let idParam = id?.toString();
+    let idStatus = statusId?.toString();
+    return this.http.patch<OrderLine>(`${this.apiUrl}/order_lines/${idParam}`, 
+      { employee: `/api/order_line_statuses/${idStatus}` }
+    ,{
+      headers: {
+        'Content-Type': 'application/merge-patch+json'
+      }
+    }).pipe(
+      catchError((error) => {
+        console.error('Erreur lors de la modification des informations', error);
+        return throwError(() => error);
+      })
+    )
+  }
+
+  updateOrderLineEmployee (id:number, employeeId:number): Observable<OrderLine> {
+    let idParam = id?.toString();
+    let idEmployee = employeeId?.toString();
+    return this.http.patch<OrderLine>(`${this.apiUrl}/order_lines/${idParam}`, 
+      { employee: `/api/employees/${idEmployee}` }
+    ,{
+      headers: {
+        'Content-Type': 'application/merge-patch+json'
+      }
+    }).pipe(
+      catchError((error) => {
+        console.error('Erreur lors de la modification des informations', error);
+        return throwError(() => error);
+      })
+    )
+  }
+
 
   addNewOrderLine (newOrderLine: NewOrderLine): Observable<OrderLine> {
     return this.http.post<OrderLine>(`${this.apiUrl}/order_lines`, newOrderLine, {'headers': this.headers}).pipe(

@@ -27,14 +27,37 @@
                       <input formControlName="base_price" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-900 focus:border-green-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required />
                     </div>
                     <div class="flex justify-center my-8">
-                        <button type="submit" [disabled]="form.invalid" class="btn-cta hover:cursor-pointer font-medium rounded-lg text-base w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" (click)="hideModal(i)">Modifier la prestation</button>
+                        <button type="submit" [disabled]="form.invalid" class="btn-cta hover:cursor-pointer font-medium rounded-lg text-base w-full sm:w-auto px-4 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" (click)="hideModal(i)">Modifier la prestation</button>
                     </div>
                     <hr>
                 </form>
-                    <div class="my-4">
-                        <p class="text-sm text-brown lato-semibold">La suppression dans ce formulaire ne fonctionne que sur les nouvelles prestations.</p>
-                        <button type="submit" (click)="deletePrestation()" (click)="hideModal(i)" class="bg-red-600 hover:cursor-pointer hover:bg-red-800 text-white rounded-lg text-sm w-full mt-2 sm:w-auto px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Supprimer la prestation</button>
+
+                <form class="max-w-screen-sm mx-auto mt-4" [formGroup]="attributionForm" (ngSubmit)="onSubmitAttribution()">
+                    <label for="categoryId" class="block mb-2 text-base lato-bold text-brown dark:text-white">Attribution des catégories</label>
+                    <select formControlName="categoryId" id="categoryId" class="block py-2.5 px-0 w-full text-brown text-base bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-900 focus:outline-none focus:ring-0 focus:border-green-900 peer" required>
+                        @for (category of categoryList$ | async; track category) {
+                          <option class="text-brown text-center" value="{{category.id}}">{{category.name}}</option>
+                        }
+                    </select>
+                    <div class="flex justify-center my-8">
+                        <button type="submit" [disabled]="form.invalid" class="btn-cta hover:cursor-pointer font-medium rounded-lg text-base w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" (click)="hideModal(i)">Attribuer la catégorie</button>
                     </div>
+                </form>
+
+                <div>
+                    <div class="block mb-2 text-base lato-bold text-brown dark:text-white">Catégories attribuées</div>
+                </div>
+                <div class="flex justify-between" *ngFor="let attribution of prestationAttribution">
+                    <p *ngFor="let category of attribution.Category" class="text-brown lato-semibold">{{category.name}}</p>
+                    <button type="submit" (click)="deleteAttribution(attribution.id)" (click)="hideModal(i)" class="bg-red-600 hover:cursor-pointer hover:bg-red-800 text-white rounded-lg text-xs w-full mt-2 sm:w-auto px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">X</button> 
+                </div>
+
+
+                <hr>
+                <div class="my-4">
+                    <p class="text-sm text-brown lato-semibold">La suppression dans ce formulaire ne fonctionne que sur les nouvelles prestations.</p>
+                    <button type="submit" (click)="deletePrestation()" (click)="hideModal(i)" class="bg-red-600 hover:cursor-pointer hover:bg-red-800 text-white rounded-lg text-sm w-full mt-2 sm:w-auto px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Supprimer la prestation</button>
+                </div>
             </div>
         </div>
     </div>

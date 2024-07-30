@@ -45,6 +45,8 @@ export class LoginComponent {
 
                   if(this.userService.getRoles()?.includes('ROLE_ADMIN')){
                     this.router.navigateByUrl('espace-prive/admin');
+                  } else if (this.userService.getRoles()?.includes('ROLE_EMPLOYEE')){
+                    this.router.navigateByUrl('espace-prive/employe');
                   } else if (this.userService.getRoles()?.includes('ROLE_CUSTOMER')){
                     this.router.navigateByUrl('espace-prive/client');
                   }
