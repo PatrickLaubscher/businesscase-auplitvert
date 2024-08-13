@@ -1,0 +1,118 @@
+<div class="p-4 sm:ml-64">
+    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <h1 class="text-2xl lato-bold mb-7">Tableau de bord - <span class="underline">Liste des lignes de commandes à traiter</span></h1>
+
+        <div class="mx-auto flex justify-center gap-4">
+            <p class="px-2 text-base bg-yellow-200 rounded-md lato-bold">Lignes de commandes en Attente : {{ orderLines | statusOrderLineCount: 2}}</p>
+            <p class="px-2 text-base bg-yellow-200 rounded-md lato-bold">Lignes de commandes en Cours : {{ orderLines | statusOrderLineCount: 1}}</p>
+        </div>
+
+
+        <div class="border mt-8">
+            <h2 class="px-2 text-xl lato-bold mb-7">Lignes de commandes en Attente | {{ orderLines | statusOrderLineCount: 2}}</h2>
+
+            <div *ngIf="(orderLines | statusOrderLineCount: 2) > 0">
+
+                @for (orderLine of orderLines | orderlineStatus: 2; track orderLine) {
+                    <div class="h-48-md mb-4 p-4 flex flex-col md:flex-row gap-2 rounded bg-gray-50 dark:bg-gray-800">
+                        <div class="md:w-1/3 w-100">
+                            <h3 class="bg-yellow-var rounded-md w-fit px-1 text-brown text-sm lato-bold mb-1">Ref cde N°{{ orderLine.main_order.id }}</h3>
+                            <p class="bg-yellow-var rounded-md w-fit px-1 text-brown text-sm lato-bold mb-4">- {{ orderLine.main_order.date| date:'dd/MM/yyyy' }} -</p>
+                            <p class="bg-brown rounded-md w-fit px-1 text-brown1-var text-sm lato-bold mb-4">- {{ orderLine.order_line_status.name }} -</p>
+                            <h2 class="w-fit px-1 text-brown text-xl lato-bold mb-1"><span class="text-sm lato-semibold">Attribuée à </span>{{ orderLine.employee.firstname }}</h2>
+                        </div>
+                        <div class="md:w-1/3 w-100">
+                            <p class="text-brown text-base lato-bold">Détails</p>
+                            <p class="text-brown text-sm lato-bold"><span class="underline">Prestation</span>: 
+                                {{ orderLine.prestation.name }}    
+                            </p>
+                            <p class="text-brown text-sm lato-bold"><span class="underline">Article</span>: 
+                                {{ orderLine.product.name }}
+                            </p>
+                            <p class="text-brown text-sm lato-bold"><span class="underline">Quantité</span>: 
+                                {{ orderLine.qty }}    
+                            </p>
+                        </div>
+                        <hr class="md:hidden">
+                        <div class="md:w-1/3 w-100 flex-column">
+                            <p class="text-brown text-base text-right lato-bold mb-2">Commande</p>
+                            <div class="mb-4 flex justify-end">
+                                <a class="focus:outline-none btn-cta rounded-lg lato-bold text-sm p-2 me-2 mb-2 dark:focus:ring-yellow-900">Voir la commande</a>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="max-w-screen-sm md:w-1/3 mx-auto" [formGroup]="form" (ngSubmit)="onSubmit(orderLine.id)">
+                        <label for="orderStatusId" class="block mb-2 text-base lato-bold text-brown dark:text-white">Mettre à jour le statut</label>
+                        <select formControlName="orderStatusId" id="orderStatusId" class="block py-2.5 px-0 w-full text-brown text-base bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-900 focus:outline-none focus:ring-0 focus:border-green-900 peer" required>
+                            @for (status of orderLineStatus$ | async; track status) {
+                              <option class="text-brown text-center" value="{{status.id}}">{{status.name}}</option>
+                            }
+                        </select>
+                        <div class="flex justify-center my-8">
+                            <button type="submit" [disabled]="form.invalid" class="btn-cta hover:cursor-pointer font-medium rounded-lg text-base w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-modal-hide="add-product">Valider</button>
+                        </div>
+                    </form>
+                }
+            </div>
+
+        </div>
+
+
+        <div class="border mt-8">
+            <h2 class="px-2 text-xl lato-bold mb-7">Lignes de commandes en Cours | {{ orderLines | statusOrderLineCount: 1}}</h2>
+
+            <div *ngIf="(orderLines | statusOrderLineCount: 1) > 0">
+                @for (orderLine of orderLines| orderlineStatus: 1; track orderLine) {
+
+                    <div class="h-48-md mb-4 p-4 flex flex-col md:flex-row gap-2 rounded bg-gray-50 dark:bg-gray-800">
+                        <div class="md:w-1/3 w-100">
+                            <h3 class="bg-yellow-var rounded-md w-fit px-1 text-brown text-sm lato-bold mb-1">Ref cde N°{{ orderLine.main_order.id }}</h3>
+                            <p class="bg-yellow-var rounded-md w-fit px-1 text-brown text-sm lato-bold mb-4">- {{ orderLine.main_order.date| date:'dd/MM/yyyy' }} -</p>
+                            <p class="bg-brown rounded-md w-fit px-1 text-brown1-var text-sm lato-bold mb-4">- {{ orderLine.order_line_status.name }} -</p>
+                            <h2 class="w-fit px-1 text-brown text-xl lato-bold mb-1"><span class="text-sm lato-semibold">Attribuée à </span>{{ orderLine.employee.firstname }}</h2>
+                        </div>
+                        <div class="md:w-1/3 w-100">
+                            <p class="text-brown text-base lato-bold">Détails</p>
+                            <p class="text-brown text-sm lato-bold"><span class="underline">Prestation</span>: 
+                                {{ orderLine.prestation.name }}    
+                            </p>
+                            <p class="text-brown text-sm lato-bold"><span class="underline">Article</span>: 
+                                {{ orderLine.product.name }}
+                            </p>
+                            <p class="text-brown text-sm lato-bold"><span class="underline">Quantité</span>: 
+                                {{ orderLine.qty }}    
+                            </p>
+                        </div>
+                        <hr class="md:hidden">
+                        <div class="md:w-1/3 w-100 flex-column">
+                            <p class="text-brown text-base text-right lato-bold mb-2">Commande</p>
+                            <div class="mb-4 flex justify-end">
+                                <a class="focus:outline-none btn-cta rounded-lg lato-bold text-sm p-2 me-2 mb-2 dark:focus:ring-yellow-900">Voir la commande</a>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="max-w-screen-sm md:w-1/3 mx-auto" [formGroup]="form" (ngSubmit)="onSubmit(orderLine.id)">
+                        <label for="orderStatusId" class="block mb-2 text-base lato-bold text-brown dark:text-white">Mettre à jour le statut</label>
+                        <select formControlName="orderStatusId" id="orderStatusId" class="block py-2.5 px-0 w-full text-brown text-base bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-900 focus:outline-none focus:ring-0 focus:border-green-900 peer" required>
+                            @for (status of orderLineStatus$ | async; track status) {
+                              <option class="text-brown text-center" value="{{status.id}}">{{status.name}}</option>
+                            }
+                        </select>
+                        <div class="flex justify-center my-8">
+                            <button type="submit" [disabled]="form.invalid" class="btn-cta hover:cursor-pointer font-medium rounded-lg text-base w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" data-modal-hide="add-product">Valider</button>
+                        </div>
+                    </form>
+                }
+            </div>
+
+        </div>
+
+
+    </div>
+
+ 
+    
+
+ </div>
+
+

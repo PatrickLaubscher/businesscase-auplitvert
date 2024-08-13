@@ -35,7 +35,7 @@
                     <div class="md:w-1/3 w-100 flex-column">
                         <p class="text-brown text-base lato-bold mb-2">Voir les détails de la commande</p>
                         <div class="mb-4">
-                            <a [routerLink]="['/espace-prive/admin/commande', order.id]"  class="focus:outline-none btn-cta rounded-lg lato-bold px-5 py-1.5 me-2 mb-2 dark:focus:ring-yellow-900">Détails</a>
+                            <a class="focus:outline-none btn-cta rounded-lg lato-bold px-5 py-1.5 me-2 mb-2 dark:focus:ring-yellow-900">Détails</a>
                         </div>
                         <p *ngIf="order.orderLines | checkIfOrderFinishedStatusLine; else elseTemplate" class="lato-bold text-sm px-2 text-white bg-yellow-500 rounded-md w-1/2">Commande en cours</p>
                         <ng-template #elseTemplate>

@@ -74,7 +74,6 @@ export class AddEmployeeComponent implements OnInit {
       const date = new Date();
       const newEmployee:newEmployee = {
         creationDate: date.toISOString(),
-        discr: 'employee',
         email : this.form.value.email,
         roles: ['ROLE_EMPLOYEE'],
         password : this.form.value.password,

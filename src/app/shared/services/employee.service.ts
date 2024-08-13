@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { ApiListResponse, Employee, newEmployee } from '../entities';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { ApiListResponse, ApiRessource, Employee, newEmployee, OrderLine } from '../entities';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { OrderLineService } from './order-line.service';
@@ -27,10 +27,24 @@ export class EmployeeService {
     );
   }
 
-  fetchOneEmployee (id:string|null): Observable<Employee> {
-    return this.http.get<Employee>(`${this.apiUrl}/users?roles=EMPLOYEE&id=${id}`);
+  fetchOneEmployee (id:number|null): Observable<Employee> {
+    const employeeId = id?.toString();
+    return this.http.get<Employee>(`${this.apiUrl}/users?roles=EMPLOYEE&id=${employeeId}`);
   }
-  
+
+  fetchOrderLinesByEmployeeId (id:number|null): Observable<OrderLine[]> {
+    const employeeId = id?.toString();
+    return this.http.get<ApiRessource<Employee>>(`${this.apiUrl}/employees?id=${employeeId}`).pipe(
+      map( response => { 
+        const employee = response['hydra:member'][0];
+        return employee ? employee.orderLines : [] }),
+      catchError(error => {
+        console.error('Erreur lors de la récupération des lignes de commandes', error);
+        return of([]); 
+    })
+    )
+  }
+
   
   updateStatusEmployee (id:string, idNewStatus:object): Observable<Object|undefined> {
     return this.http.patch<Object>(`${this.apiUrl}/employees/${id}`, idNewStatus,{

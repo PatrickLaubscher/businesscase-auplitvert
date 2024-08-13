@@ -59,7 +59,6 @@ export interface newAdmin {
     email: string;
     password: string;
     roles: string[];
-    discr: string;
 }
 
 export interface patchAdmin {
@@ -100,7 +99,6 @@ export interface newEmployee {
     password: string;
     employee_status: string;
     roles: string[];
-    discr: string;
     creationDate: string;
 }
 
@@ -113,6 +111,7 @@ export interface Customer {
     email: string;
     phone: string;
     creationDate: string;
+    orders: Order[];
 }
 
 export interface newCustomer {
@@ -125,7 +124,6 @@ export interface newCustomer {
     password: string;
     phone: string;
     roles: string[];
-    discr: string;
     creationDate: string;
 }
 
@@ -246,6 +244,7 @@ export interface Order {
     date: string;
     orderLines: OrderLine[];
     customer: Customer;
+    payment_mode: PaymentMode;
 }
 
 export interface NewOrder {
@@ -262,6 +261,7 @@ export interface OrderLine {
     order_line_status: OrderLineStatus;
     main_order: Order;
     qty: number;
+    price: number;
     employee: Employee;
 }
 

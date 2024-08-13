@@ -56,18 +56,10 @@ export class SubscriptionComponent implements OnInit {
     if(this.form.valid) { 
       const date = new Date();
 
-      let discr = '';
-      if(this.form.value.role === 'ROLE_CUSTOMER') {
-        discr = 'customer';
-      } else if (this.form.value.role === 'ROLE_ADMIN') {
-        discr = 'admin';
-      } 
-
       const newCustomer:newCustomer = {
         address: this.form.value.address,
         city: 'api/cities/' + this.form.value.city,
         creationDate: date.toISOString(),
-        discr: discr,
         email : this.form.value.email,
         roles: [this.form.value.role],
         password : this.form.value.password,

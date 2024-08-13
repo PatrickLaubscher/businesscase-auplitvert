@@ -11,6 +11,10 @@ export class StatusOrderLineCountPipe implements PipeTransform {
     let statusName:string = "";
     let count:number = 0;
 
+    if (!value) {
+      return 0;
+  }
+
     if(status === 1) {
       statusName = "En cours";
     } else if (status === 2) {

@@ -72,7 +72,7 @@ export class OrderLineService {
     let idParam = id?.toString();
     let idStatus = statusId?.toString();
     return this.http.patch<OrderLine>(`${this.apiUrl}/order_lines/${idParam}`, 
-      { employee: `/api/order_line_statuses/${idStatus}` }
+      { order_line_status: `/api/order_line_statuses/${idStatus}` }
     ,{
       headers: {
         'Content-Type': 'application/merge-patch+json'

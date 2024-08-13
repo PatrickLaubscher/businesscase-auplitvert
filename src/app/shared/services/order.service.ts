@@ -24,6 +24,10 @@ export class OrderService {
     );
   }
 
+  fetchOneOrder (id:string): Observable<Order> {
+    return this.http.get<Order>(`${this.apiUrl}/orders/${id}`);
+  }
+
   addNewOrder (newOrder: NewOrder): Observable<Order> {
     return this.http.post<Order>(`${this.apiUrl}/orders`, newOrder, {'headers': this.headers}).pipe(
       catchError((error) => {

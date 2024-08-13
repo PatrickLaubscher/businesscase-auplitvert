@@ -26,7 +26,13 @@ import { AttributionOrderComponent } from './private/admin/attribution-order/att
 import { EmployeeDashboardComponent } from './private/employee/employee-dashboard/employee-dashboard.component';
 import { employeeGuard } from './shared/employee.guard';
 import { EmployeeHomeComponent } from './private/employee/employee-home/employee-home.component';
-import { AddAdminComponent } from './public/add-admin-DEV/add-admin.component';
+import { AddAdminComponent } from './private/admin/add-admin/add-admin.component';
+import { OrderProcessEmployeeComponent } from './private/employee/order-process-employee/order-process-employee.component';
+import { OrderProcessAdminComponent } from './private/admin/order-process-admin/order-process-admin.component';
+import { OrderDetailsComponent } from './private/admin/order-details/order-details.component';
+import { OrderListCustomerComponent } from './private/customer/order-list-customer/order-list-customer.component';
+import { OrderDetailsCustomerComponent } from './private/customer/order-details-customer/order-details-customer.component';
+
 
 
 
@@ -50,21 +56,30 @@ export const routes: Routes = [
                     {path: 'employes', component: EmployeeListComponent},
                     {path: 'employee/:id', component: EmployeeDetailsComponent},
                     {path: 'ajouter-employe', component: AddEmployeeComponent},
+                    {path: 'ajouter-manager', component: AddAdminComponent},
                     {path: 'commandes', component: OrderListComponent},
                     {path: 'ligne-de-commandes', component: OrderLineListComponent},
                     {path: 'prestations-et-catégories', component: PrestationListComponent},
                     {path: 'articles', component: ProductListComponent},
-                    {path: 'attribution-commandes', component: AttributionOrderComponent}
+                    {path: 'attribution-commandes', component: AttributionOrderComponent},
+                    {path: 'traitement-commandes', component: OrderProcessAdminComponent},
+                    {path: 'commande/:id', component: OrderDetailsComponent}
                 ]
             },
             {path: 'employe', component: EmployeeDashboardComponent, canActivate:[employeeGuard], 
                 children: [
-                    {path: '', component: EmployeeHomeComponent}
+                    {path: '', component: EmployeeHomeComponent},
+                    {path: 'commandes', component: OrderListComponent},
+                    {path: 'ligne-de-commandes', component: OrderLineListComponent},
+                    {path: 'traitement-commandes', component: OrderProcessEmployeeComponent},
+                    {path: 'commande/:id', component: OrderDetailsComponent}
                 ]
             },
             {path: 'client', component: CustomerDashboardComponent, canActivate:[customerGuard], 
                 children: [
-                    {path: '', component: CustomerHomeComponent}
+                    {path: '', component: CustomerHomeComponent},
+                    {path: 'commandes', component: OrderListCustomerComponent},
+                    {path: 'commande/:id', component: OrderDetailsCustomerComponent}
                 ]
             },
         ]

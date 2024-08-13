@@ -5,7 +5,7 @@ import { UserService } from '../../../shared/services/user.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CivilityService } from '../../../shared/services/civility.service';
 import { CommonModule } from '@angular/common';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { EmployeeStatusService } from '../../../shared/services/employee-status.service';
 import { EmployeeService } from '../../../shared/services/employee.service';
 
@@ -51,8 +51,7 @@ export class EmployeeDetailsComponent implements OnInit {
         next: (data) => {this.employee$ = data;
           this.loadFormDefaultValues();
           this.loadFormStatusDefaultValues();
-          this.id = idSearch;
-          console.log(this.employee$);},
+          this.id = idSearch;},
         error: () => {
           console.log('Erreur dans la récupération des données');
         }

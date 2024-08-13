@@ -7,48 +7,40 @@ import { CountPipe } from '../../../shared/services/pipes/count.pipe';
 import { StatusOrderLineCountPipe } from '../../../shared/services/pipes/status-order-line-count.pipe';
 import { CheckIfOrderFinishedStatusLinePipe } from '../../../shared/services/pipes/check-if-order-finished-status-line.pipe';
 import { RouterLink } from '@angular/router';
+import { UserService } from '../../../shared/services/user.service';
+import { CustomerService } from '../../../shared/services/customer.service';
+
 
 
 @Component({
-  selector: 'app-order-list',
+  selector: 'app-order-list-customer',
   standalone: true,
   imports: [CommonModule, CountPipe, StatusOrderLineCountPipe, CheckIfOrderFinishedStatusLinePipe, RouterLink],
-  templateUrl: './order-list.component.html',
-  styleUrl: './order-list.component.css'
+  templateUrl: './order-list-customer.component.html',
+  styleUrl: './order-list-customer.component.css'
 })
-export class OrderListComponent implements OnInit{
-
+export class OrderListCustomerComponent {
+  
+  userService = inject(UserService);
+  customerService = inject(CustomerService);
   orderService = inject(OrderService);
-
-  currentPage$ = new BehaviorSubject<number>(1);
-  currentPageData$!: Observable<Order[]>;
-  itemPerPage:number = 10;
+  orderListCustomer$! : Observable<Order[]>;
 
   ngOnInit(): void {
     this.fetchAllOrders();
   }
 
   fetchAllOrders() {
-    this.currentPageData$ = this.currentPage$.pipe(
-      switchMap((currentPage) =>
-        this.orderService.fetchAllOrders(currentPage, this.itemPerPage)
-      ));
-    /*this.currentPageData$.subscribe({
-      next: (data:Order[]) => {data},
-      complete: () => {
-        console.log("Liste des commandes chargées")
-      }
-    })*/
-  }
-
-  nextPage() {
-    this.currentPage$.next(this.currentPage$.value + 1);
-  }
-
-  prevPage() {
-    if (this.currentPage$.value > 1) {
-      this.currentPage$.next(this.currentPage$.value - 1);
+    let user = this.userService.getUser();
+    if (user) {
+      this.orderListCustomer$ = this.customerService.fetchOrderByCustomerId(user.id);
     }
+    this.orderListCustomer$.subscribe(
+      data => console.log(data)
+    )
   }
+
+
 
 }
+

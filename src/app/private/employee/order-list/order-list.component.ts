@@ -6,13 +6,12 @@ import { CommonModule } from '@angular/common';
 import { CountPipe } from '../../../shared/services/pipes/count.pipe';
 import { StatusOrderLineCountPipe } from '../../../shared/services/pipes/status-order-line-count.pipe';
 import { CheckIfOrderFinishedStatusLinePipe } from '../../../shared/services/pipes/check-if-order-finished-status-line.pipe';
-import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [CommonModule, CountPipe, StatusOrderLineCountPipe, CheckIfOrderFinishedStatusLinePipe, RouterLink],
+  imports: [CommonModule, CountPipe, StatusOrderLineCountPipe, CheckIfOrderFinishedStatusLinePipe],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.css'
 })
