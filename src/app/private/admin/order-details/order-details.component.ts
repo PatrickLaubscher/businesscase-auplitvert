@@ -17,7 +17,6 @@ export class OrderDetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private orderService = inject(OrderService);
-  id!:string;
   order$! : Order;
   totalNetOrder: number = 0;
 
@@ -30,9 +29,7 @@ export class OrderDetailsComponent implements OnInit {
     let idSearch = this.route.snapshot.paramMap.get('id');
     if(idSearch  != null) {
       this.orderService.fetchOneOrder(idSearch).subscribe ({
-        next: (data) => {this.order$ = data;
-          this.id = idSearch;
-          console.log(this.order$);},
+        next: (data) => {this.order$ = data;},
           error: () => {
             console.log('Erreur dans la récupération des données');
           }

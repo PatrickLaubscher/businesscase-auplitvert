@@ -1,5 +1,5 @@
 <div class="p-4 sm:ml-64">
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+    <div *ngIf="order$" class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
         <h1 class="text-2xl lato-bold mb-7">Tableau de bord - Détails commande n°{{ order$.id }}</h1>
     
         <div class="border my-4 px-4 rounded-md w-fit bg-yellow-var text-brown lato-semibold">

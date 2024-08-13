@@ -6,13 +6,13 @@ import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../../../shared/services/employee.service';
 import { StatusOrderLineCountPipe } from '../../../shared/services/pipes/status-order-line-count.pipe';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-attribution-order',
   standalone: true,
-  imports: [CommonModule, StatusOrderLineCountPipe, ReactiveFormsModule],
+  imports: [CommonModule, StatusOrderLineCountPipe, ReactiveFormsModule, RouterLink],
   templateUrl: './attribution-order.component.html',
   styleUrl: './attribution-order.component.css'
 })

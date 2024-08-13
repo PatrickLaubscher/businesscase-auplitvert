@@ -5,14 +5,14 @@ import { StatusOrderLineCountPipe } from '../../../shared/services/pipes/status-
 import { OrderlineStatusPipe } from '../../../shared/services/pipes/orderline-status.pipe';
 import { OrderLineService } from '../../../shared/services/order-line.service';
 import { OrderLineStatusService } from '../../../shared/services/order-line-status.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { OrderLine, OrderLineStatus } from '../../../shared/entities';
 
 @Component({
   selector: 'app-order-process-admin',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, StatusOrderLineCountPipe, OrderlineStatusPipe],
+  imports: [CommonModule, ReactiveFormsModule, StatusOrderLineCountPipe, OrderlineStatusPipe, RouterLink],
   templateUrl: './order-process-admin.component.html',
   styleUrl: './order-process-admin.component.css'
 })
