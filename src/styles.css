@@ -65,7 +65,7 @@
 }
 
 .bg-logo {
-    background-image: url('../public/img/bg-logo.png');
+    background-image: url('../public/img/bg-logo.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: center;
