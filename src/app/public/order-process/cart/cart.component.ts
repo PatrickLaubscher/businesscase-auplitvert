@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../../shared/services/cart.service';
 import { CartLineOrder } from '../../../shared/entities';
 import { Router, RouterLink } from '@angular/router';
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   cartService = inject(CartService);
 

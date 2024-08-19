@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CartLineOrder, Category, NewOrderLine, PrestationWithAttribution, Product } from '../entities';
+import { CartLineOrder, Category, PrestationWithAttribution, Product } from '../entities';
 
 
 
@@ -159,7 +159,7 @@ export class CartService {
     localStorage.setItem('total_qty', JSON.stringify(this.totalQty)); 
   }
 
-  clearTotalQty() {
+  clearTotalQty(): void {
     this.totalQty = 0;
     localStorage.removeItem('total_qty');
   }

@@ -3,11 +3,12 @@ import { RouterLink } from '@angular/router';
 import { AuthentificationService } from '../../shared/services/authentification.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../shared/services/user.service';
+import { IconCartComponent } from "../../components/icon-cart/icon-cart.component";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, IconCartComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
