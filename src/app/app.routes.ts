@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomepageComponent } from './public/homepage/homepage.component';
 import { LoginComponent } from './public/login/login.component';
-import { SubscriptionComponent } from './public/subscription/subscription.component';
+import { SubscriptionComponent } from './public/subscription-process/subscription/subscription.component';
 import { PublicLayoutComponent } from './public/public-layout/public-layout.component';
 import { PrivateLayoutComponent } from './private/private-layout/private-layout.component';
 import { AdminDashboardComponent } from './private/admin/admin-dashboard/admin-dashboard.component';
@@ -33,6 +33,7 @@ import { OrderDetailsComponent } from './private/admin/order-details/order-detai
 import { OrderListCustomerComponent } from './private/customer/order-list-customer/order-list-customer.component';
 import { OrderDetailsCustomerComponent } from './private/customer/order-details-customer/order-details-customer.component';
 import { PrestationPriceListComponent } from './public/prestation-price-list/prestation-price-list.component';
+import { SubscriptionConfirmationComponent } from './public/subscription-process/subscription-confirmation/subscription-confirmation.component';
 
 
 
@@ -44,6 +45,7 @@ export const routes: Routes = [
             {path: 'liste-des-prestations', component:PrestationPriceListComponent},
             {path: 'login', component: LoginComponent},
             {path: 'inscription', component: SubscriptionComponent},
+            {path: 'confirmation-inscription', component: SubscriptionConfirmationComponent},
             {path: 'faire-un-dépot', component:OrderProcessSelectionComponent},
             {path: 'panier', component:CartComponent},
             {path: 'paiement', component: PaymentSelectionComponent},
