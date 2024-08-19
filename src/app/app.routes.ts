@@ -32,6 +32,7 @@ import { OrderProcessAdminComponent } from './private/admin/order-process-admin/
 import { OrderDetailsComponent } from './private/admin/order-details/order-details.component';
 import { OrderListCustomerComponent } from './private/customer/order-list-customer/order-list-customer.component';
 import { OrderDetailsCustomerComponent } from './private/customer/order-details-customer/order-details-customer.component';
+import { PrestationPriceListComponent } from './public/prestation-price-list/prestation-price-list.component';
 
 
 
@@ -40,6 +41,7 @@ export const routes: Routes = [
     {path: '', component: PublicLayoutComponent,
         children: [
             {path: '', component: HomepageComponent},
+            {path: 'liste-des-prestations', component:PrestationPriceListComponent},
             {path: 'login', component: LoginComponent},
             {path: 'inscription', component: SubscriptionComponent},
             {path: 'faire-un-dépot', component:OrderProcessSelectionComponent},

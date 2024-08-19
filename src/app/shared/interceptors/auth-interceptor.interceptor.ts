@@ -15,6 +15,7 @@ export const allowedUrls: AllowedUrl[] = [
   { url: '/products', methods: ['GET'] },
   { url: '/categories', methods: ['GET'] },
   { url: '/civilities', methods: ['GET'] },
+
   { url: '/token/refresh', methods: ['POST'] }
 ];
 
