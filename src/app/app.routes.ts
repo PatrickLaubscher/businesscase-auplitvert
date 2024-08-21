@@ -34,7 +34,8 @@ import { OrderListCustomerComponent } from './private/customer/order-list-custom
 import { OrderDetailsCustomerComponent } from './private/customer/order-details-customer/order-details-customer.component';
 import { PrestationPriceListComponent } from './public/prestation-price-list/prestation-price-list.component';
 import { SubscriptionConfirmationComponent } from './public/subscription-process/subscription-confirmation/subscription-confirmation.component';
-import { LoginRoutingComponent } from './public/order-process/login-routing/login-routing.component';
+import { OrderRoutingComponent } from './public/order-process/order-routing/order-routing.component';
+import { LoginRoutingComponent } from './public/login-routing/login-routing.component';
 
 
 
@@ -45,11 +46,12 @@ export const routes: Routes = [
             {path: '', component: HomepageComponent},
             {path: 'liste-des-prestations', component:PrestationPriceListComponent},
             {path: 'login', component: LoginComponent},
+            {path: 'login-confirmation', component: LoginRoutingComponent},
             {path: 'inscription', component: SubscriptionComponent},
             {path: 'confirmation-inscription', component: SubscriptionConfirmationComponent},
             {path: 'faire-un-dépot', component:OrderProcessSelectionComponent},
             {path: 'panier', component:CartComponent},
-            {path: 'confirmer-connexion', component: LoginRoutingComponent},
+            {path: 'confirmer-connexion', component: OrderRoutingComponent},
             {path: 'paiement', component: PaymentSelectionComponent},
             {path: 'confirmation-commande', component: OrderConfirmationComponent}
         ]
