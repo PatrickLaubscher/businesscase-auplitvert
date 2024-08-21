@@ -4,6 +4,7 @@ import { CartLineOrder } from '../../../shared/entities';
 import { Router, RouterLink } from '@angular/router';
 import { TtcPricePipe } from '../../../shared/services/pipes/ttc-price.pipe';
 import { CommonModule } from '@angular/common';
+import { AuthentificationService } from '../../../shared/services/authentification.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
 export class CartComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   cartService = inject(CartService);
+  auth = inject(AuthentificationService);
 
   cartItems:CartLineOrder[] = [];
   totalNetPrice:number = 0;
@@ -41,8 +43,6 @@ export class CartComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.displayTotalQty();
   }
 
-
-
   displayCart() {
     this.cartService.loadCart();
     this.cartItems = this.cartService.getItems();
@@ -64,5 +64,14 @@ export class CartComponent implements OnInit, AfterViewInit, AfterViewChecked {
   goToSelectPage() {
     this.router.navigateByUrl('faire-un-dépot');
   }
+
+  validateCart() {
+    if(this.auth.checkIfAuthenticated()) {
+      this.router.navigateByUrl('/paiement');
+    } else {
+      this.router.navigateByUrl('/confirmer-connexion');
+    }
+  }
+
 
 }
