@@ -53,6 +53,7 @@ export class OrderProcessSelectionComponent implements OnInit {
   selectPrestation(prestation: PrestationWithAttribution): void {
     this.prestationSelected = prestation;
     this.changeProductSelect(null, null);
+    this.hideModalPrestation();
   }
 
 
@@ -76,6 +77,23 @@ export class OrderProcessSelectionComponent implements OnInit {
     this.productSelected = product;
   }
 
+  hideModalPrestation(): void {
+    document.getElementById('prestation-list')?.classList.add('hidden');
+    document.body.classList.remove('overflow-y-hidden');
+  }
+
+  onBackdropClickPrestation(event: MouseEvent): void {
+    if ((event.target as HTMLElement).id === 'prestation-list') {
+      this.hideModalPrestation();
+    }
+  }
+
+  showModalPrestation(): void {
+    document.getElementById('prestation-list')?.classList.remove('hidden');
+    document.getElementById('prestation-list')?.classList.add('flex');
+    document.body.classList.add('overflow-y-hidden');
+  }
+  
 
   hideModalProduct(): void {
     document.getElementById('product-list')?.classList.add('hidden');
