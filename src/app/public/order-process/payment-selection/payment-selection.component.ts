@@ -40,7 +40,6 @@ export class PaymentSelectionComponent implements OnInit {
       (data) => {this.statusNewOrderLine = data;}
     );
 
-    
     if(!localStorage.getItem("cart_items")) {
       this.router.navigateByUrl('/panier');
     }
