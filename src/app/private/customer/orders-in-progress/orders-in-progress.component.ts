@@ -11,15 +11,14 @@ import { UserService } from '../../../shared/services/user.service';
 import { CustomerService } from '../../../shared/services/customer.service';
 
 
-
 @Component({
-  selector: 'app-order-list-customer',
+  selector: 'app-orders-in-progress',
   standalone: true,
   imports: [CommonModule, CountPipe, StatusOrderLineCountPipe, CheckIfOrderFinishedStatusLinePipe, RouterLink],
-  templateUrl: './order-list-customer.component.html',
-  styleUrl: './order-list-customer.component.css'
+  templateUrl: './orders-in-progress.component.html',
+  styleUrl: './orders-in-progress.component.css'
 })
-export class OrderListCustomerComponent implements OnInit {
+export class OrdersInProgressComponent implements OnInit {
   
   userService = inject(UserService);
   customerService = inject(CustomerService);
@@ -43,4 +42,3 @@ export class OrderListCustomerComponent implements OnInit {
 
 
 }
-

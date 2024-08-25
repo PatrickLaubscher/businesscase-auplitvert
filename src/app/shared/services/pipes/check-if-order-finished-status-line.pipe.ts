@@ -11,7 +11,7 @@ export class CheckIfOrderFinishedStatusLinePipe implements PipeTransform {
     let count:number = 0;
 
     for(let i = 0; i < value.length; i++) {
-      if (value[i].order_line_status.name === "Terminée") {
+      if (value[i].order_line_status.name == "Terminée") {
         count ++
       }
     }

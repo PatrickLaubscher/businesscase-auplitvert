@@ -36,6 +36,7 @@ import { PrestationPriceListComponent } from './public/prestation-price-list/pre
 import { SubscriptionConfirmationComponent } from './public/subscription-process/subscription-confirmation/subscription-confirmation.component';
 import { OrderRoutingComponent } from './public/order-process/order-routing/order-routing.component';
 import { LoginRoutingComponent } from './public/login-routing/login-routing.component';
+import { OrdersInProgressComponent } from './private/customer/orders-in-progress/orders-in-progress.component';
 
 
 
@@ -87,6 +88,7 @@ export const routes: Routes = [
                 children: [
                     {path: '', component: CustomerHomeComponent},
                     {path: 'commandes', component: OrderListCustomerComponent},
+                    {path: 'commandes-en-cours', component: OrdersInProgressComponent},
                     {path: 'commande/:id', component: OrderDetailsCustomerComponent}
                 ]
             },
