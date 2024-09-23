@@ -235,8 +235,6 @@ export interface PatchPrestation {
 }
 
 
-
-
 /* Orders */
 
 export interface Order {
@@ -249,6 +247,7 @@ export interface Order {
 
 export interface NewOrder {
     date: string;
+    deposit_date: string;
     customer: string;
     paymentMode: string;
 }

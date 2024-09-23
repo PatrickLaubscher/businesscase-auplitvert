@@ -34,6 +34,9 @@ export class PaymentSelectionComponent implements OnInit {
   statusNewOrderLine!: OrderLineStatus;
 
   ngOnInit(): void {
+    if(this.orderService.getDepositDate() == null) {
+      this.router.navigateByUrl('/panier');
+    } 
     this.paymentModeList$ = this.paymentModeService.fetchAllPaymentMode();
     this.user = this.userService.getUser();
     this.orderLineStatusService.searchOrderLineStatusByName('attente').subscribe(
@@ -50,39 +53,48 @@ export class PaymentSelectionComponent implements OnInit {
   });
 
   onSubmit() {
-    if(this.form.valid && this.user) { 
-      const date = new Date();
-      const newOrder:NewOrder = {
-        date: date.toISOString(),
-        customer: 'api/customers/' + this.user.id,
-        paymentMode: 'api/payment_modes/' + this.form.value.paymentMode
-      };
-      this.form.reset();
-  
-      this.orderService.addNewOrder(newOrder).subscribe({    
-        next: (response) => {
-          const orderId = response.id;
-          const OrderStatusId = this.statusNewOrderLine.id.toString();
-          this.itemsCart = this.cartService.loadCart();
+    if(this.form.valid && this.user) {
+      const depositDate = this.orderService.getDepositDate();
+      if (depositDate) {
+        const [day, month, year] = depositDate.split('-');
+        const formattedDate = new Date(`${year}-${month}-${day}`);
+        const isoFormattedDate = formattedDate.toISOString();
+        const date = new Date();
+        const newOrder:NewOrder = {
+          date: date.toISOString(),
+          deposit_date: isoFormattedDate,
+          customer: 'api/customers/' + this.user.id,
+          paymentMode: 'api/payment_modes/' + this.form.value.paymentMode
+        };
+        this.form.reset();
+    
+        this.orderService.addNewOrder(newOrder).subscribe({    
+          next: (response) => {
+            const orderId = response.id;
+            const OrderStatusId = this.statusNewOrderLine.id.toString();
+            this.itemsCart = this.cartService.loadCart();
 
-          this.itemsCart.forEach( (itemCart) => {
-              let newOrderLine:NewOrderLine = {
-                main_order: 'api/orders/' + orderId,
-                product: 'api/products/' + itemCart.product.id,
-                prestation: 'api/prestations/' + itemCart.prestation.id,
-                order_line_status: 'api/order_line_statuses/' + this.statusNewOrderLine.id,
-                qty: itemCart.quantity,
-                price: itemCart.totalPrice,
-              } 
-              this.orderLineService.addNewOrderLine(newOrderLine).subscribe();
-          });
-          this.cartService.clearCart();
-          console.log('La commande a bien été créée'); this.router.navigateByUrl('/confirmation-commande')},
-        error: (error) => console.error('Il y a eu une erreur dans la validation de la commande'),
-        complete() {
-          (prompt:string) => {prompt = "La commande a bien été créée, merci!"}
-        },
-      });
+            this.itemsCart.forEach( (itemCart) => {
+                let newOrderLine:NewOrderLine = {
+                  main_order: 'api/orders/' + orderId,
+                  product: 'api/products/' + itemCart.product.id,
+                  prestation: 'api/prestations/' + itemCart.prestation.id,
+                  order_line_status: 'api/order_line_statuses/' + this.statusNewOrderLine.id,
+                  qty: itemCart.quantity,
+                  price: itemCart.totalPrice,
+                } 
+                this.orderLineService.addNewOrderLine(newOrderLine).subscribe();
+            });
+            this.cartService.clearCart();
+            this.orderService.removeDepositDate();
+            console.log('La commande a bien été créée'); 
+            this.router.navigateByUrl('/confirmation-commande')},
+          error: (error) => console.error('Il y a eu une erreur dans la validation de la commande'),
+          complete() {
+            (prompt:string) => {prompt = "La commande a bien été créée, merci!"}
+          },
+        });
+      }
     }
   }
 

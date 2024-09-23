@@ -18,10 +18,20 @@
                 </button>
             </div>    
             
-            <div *ngIf="cartItems.length > 0">
-                    
+            <form *ngIf="cartItems.length > 0" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <div class="px-4 my-8 flex flex-col md:flex-row gap-4 md:items-center">
+                    <p class="lato-bold text-xl md:text-2xl min-w-fit text-brown">1. Choisissez une date dépôt</p>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Date de dépôt</mat-label>
+                        <input matInput datepicker-format="dd-mm-yyyy" [matDatepicker]="picker" formControlName="depositDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
 
                 <div class="relative overflow-x-auto">
+                    <p class="px-4 my-8 lato-bold text-xl md:text-2xl min-w-fit text-brown">2. Valider votre panier</p>
                     <table class="w-full md:text-xl text-sm text-center rtl:text-right bg-brown2 dark:text-gray-400">
                         <thead class="md:text-base text-xs lato-bold text-brown1-var uppercase bg-brown2 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -110,12 +120,18 @@
                                 </tr>
                         </tbody>
                     </table>
-                    <button (click)="validateCart()" class="btn btn-cta px-4 text-sm md:text-xl py-1 rounded-md lato-bold">Valider le panier</button>
-
+                    <div *ngIf="form.invalid">
+                        <span class="lato-regular underline">
+                            Veuillez renseigner votre date de dépôt ci-dessus
+                        </span>
+                    </div>
+                    <button *ngIf="form.valid" type="submit" [formGroup]="form" class="btn btn-cta px-4 text-sm md:text-xl py-1 rounded-md lato-bold">
+                        Valider le panier
+                    </button>
                 </div>
 
 
-            </div>
+            </form>
 
             <div>
                 <button type="button" class="btn text-sm underline md:text-xl px-4 py-1 rounded-md lato-bold" (click)="cartService.clearCart()">Vider le panier</button>

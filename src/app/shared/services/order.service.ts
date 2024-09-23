@@ -47,4 +47,16 @@ export class OrderService {
     );
   }
 
+  setDepositDate(depositDate: string):void  {
+    return localStorage.setItem('depositDate', depositDate);
+  }
+
+  getDepositDate(): string|null {
+    return localStorage.getItem('depositDate');
+  }
+
+  removeDepositDate(): void {
+    localStorage.removeItem('depositeDate');
+  }
+
 }
