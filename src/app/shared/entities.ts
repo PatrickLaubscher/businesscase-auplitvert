@@ -243,6 +243,8 @@ export interface Order {
     orderLines: OrderLine[];
     customer: Customer;
     payment_mode: PaymentMode;
+    deposit_date: string;
+    available_date: string;
 }
 
 export interface NewOrder {

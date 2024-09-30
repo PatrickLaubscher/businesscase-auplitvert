@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { OrderLineService } from '../../../shared/services/order-line.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Employee, OrderLine } from '../../../shared/entities';
 import { CommonModule } from '@angular/common';
 import { EmployeeService } from '../../../shared/services/employee.service';
@@ -24,6 +24,7 @@ export class AttributionOrderComponent {
 
   noEmployeeOrderLineList$!: Observable<OrderLine[]>;
   employees$! : Observable<Employee[]>;
+  employeesList: Employee[] = [];
 
   form: FormGroup = new FormGroup({
     employeeId: new FormControl('', {validators: [Validators.required]})
@@ -42,6 +43,9 @@ export class AttributionOrderComponent {
 
   fetchAllEmployees() {
     this.employees$ = this.employeesService.fetchAllEmployees();
+    this.employees$.subscribe(
+      data => {this.employeesList = data}
+    )
   }
 
   

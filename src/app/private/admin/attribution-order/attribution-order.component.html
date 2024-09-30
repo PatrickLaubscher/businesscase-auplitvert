@@ -55,7 +55,7 @@
                 <form class="max-w-screen-sm md:w-1/3 mx-auto" [formGroup]="form" (ngSubmit)="onSubmit(orderLine.id)">
                     <label for="employeeId" class="block mb-2 text-base lato-bold text-brown dark:text-white">Choisir l'employé(e)</label>
                     <select formControlName="employeeId" id="employeeId" class="block py-2.5 px-0 w-full text-brown text-base bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-900 focus:outline-none focus:ring-0 focus:border-green-900 peer" required>
-                        @for (employee of employees$ | async; track employee) {
+                        @for (employee of employeesList; track employee) {
                           <option class="text-brown text-center" value="{{employee.id}}">{{employee.firstname}}</option>
                         }
                     </select>
