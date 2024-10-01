@@ -1,6 +1,6 @@
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-        <h1 class="text-2xl lato-bold mb-7">Tableau de bord - <span class="underline">Gestion des employés</span></h1>
+        <h1 class="text-2xl lato-bold mb-7">Tableau de bord - <span class="underline">Modification de mon statut et de mes données</span></h1>
         <h2 class="text-2xl lato-bold mb-14">Fiche de {{ employee$?.firstname }} {{ employee$?.lastname }}</h2>
 
         <form class="max-w-screen-md w-1/4-lg px-4 mx-auto p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mb-12" [formGroup]="formStatus" (ngSubmit)="onSubmitFormStatus($event)">

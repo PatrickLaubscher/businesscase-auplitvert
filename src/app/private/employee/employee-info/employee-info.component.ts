@@ -44,7 +44,7 @@ export class EmployeeInfoComponent {
   })
 
   fetchOneEmployee () {
-    let idSearch = this.route.snapshot.paramMap.get('id');
+    let idSearch = this.userService.getUser()?.id.toString();
     if(idSearch  != null) {
       this.userService.fetchOneUserEmployeeById(idSearch).subscribe({
         next: (data) => {this.employee$ = data;
