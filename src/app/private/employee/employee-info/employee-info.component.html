@@ -1,0 +1,54 @@
+<div class="p-4 sm:ml-64">
+    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <h1 class="text-2xl lato-bold mb-7">Tableau de bord - <span class="underline">Gestion des employés</span></h1>
+        <h2 class="text-2xl lato-bold mb-14">Fiche de {{ employee$?.firstname }} {{ employee$?.lastname }}</h2>
+
+        <form class="max-w-screen-md w-1/4-lg px-4 mx-auto p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mb-12" [formGroup]="formStatus" (ngSubmit)="onSubmitFormStatus($event)">
+            <h3 class="text-xl lato-bold mb-10">Mettre à jour mon statut</h3>
+            <div class="relative z-0 w-1/4 mb-7 group">
+                <label for="Civility" class="peer-focus:font-medium absolute text-brown text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Statut</label>
+                <select formControlName="employee_status" id="employee_status" class="block py-2.5 px-0 w-full text-brown text-base bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-900 focus:outline-none focus:ring-0 focus:border-green-900 peer" required>
+                    @for (status of employeeStatus$ | async; track status) {
+                        <option class="text-brown" value="{{status.id}}">{{status.name}}</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn-cta font-medium rounded-lg text-base w-full sm:w-auto mt-8 px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enregistrer les modifications</button>
+        </form>
+
+        <form class="max-w-screen-md w-1/4-lg px-4 mx-auto p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mb-12" [formGroup]="form" (ngSubmit)="onSubmitForm($event)">
+            <h3 class="text-xl lato-bold mb-10">Informations générales</h3>
+            <div class="relative z-0 w-1/4 mb-7 group">
+                <label for="Civility" class="peer-focus:font-medium absolute text-brown text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Civilité</label>
+                <select formControlName="civility" id="civility" class="block py-2.5 px-0 w-full text-brown text-base bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-900 focus:outline-none focus:ring-0 focus:border-green-900 peer" required>
+                    @for (civility of civilities$ | async; track civility) {
+                        <option class="text-brown" value="{{civility.id}}">{{civility.name}}</option>
+                    }
+                </select>
+            </div>
+            <div class="grid md:grid-cols-2 md:gap-6">
+                <div class="relative z-0 w-full mb-8 group">
+                    <input type="text" formControlName="firstname" id="firstname" class="block py-2.5 px-0 w-full text-brown text-xl bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-900 peer"  required />
+                    <label for="firstname" class="peer-focus:font-medium text-brown text-base dark:text-gray-400 duration-300 peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Prénom</label>
+                </div>
+                <div class="relative z-0 w-full mb-8 group">
+                    <input type="text" formControlName="lastname" id="lastname" class="block py-2.5 px-0 w-full text-brown text-xl bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-900 peer" required />
+                    <label for="lastname" class="peer-focus:font-medium text-brown text-base dark:text-gray-400 duration-300 peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Nom</label>
+                </div>
+            </div>
+            <div class="relative z-0 w-full mb-8 group">
+                <input type="email" formControlName="email" id="email" class="block py-2.5 px-0 w-full text-brown text-xl bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-900 peer" required />
+                <label for="email" class="peer-focus:font-medium text-brown text-base dark:text-gray-400 duration-300 peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Adresse email</label>
+            </div>
+            <div class="grid md:grid-cols-2 md:gap-6">
+                <div class="relative z-0 w-full mb-5 group">
+                    <input type="tel" formControlName="phone" id="phone" class="block py-2.5 px-0 w-full text-brown text-xl bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-green-900 peer" required />
+                    <label for="phone" class="peer-focus:font-medium text-brown text-base dark:text-gray-400 duration-300 peer-focus:text-green-900 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-0 peer-focus:-translate-y-6">Numéro de téléphone</label>
+                </div>
+            </div>
+            <button type="submit" class="btn-cta font-medium rounded-lg text-base w-full sm:w-auto mt-8 px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Enregistrer les modifications</button>
+        </form>
+
+    </div>
+
+</div>

@@ -37,6 +37,7 @@ import { SubscriptionConfirmationComponent } from './public/subscription-process
 import { OrderRoutingComponent } from './public/order-process/order-routing/order-routing.component';
 import { LoginRoutingComponent } from './public/login-routing/login-routing.component';
 import { OrdersInProgressComponent } from './private/customer/orders-in-progress/orders-in-progress.component';
+import { EmployeeInfoComponent } from './private/employee/employee-info/employee-info.component';
 
 
 
@@ -81,7 +82,8 @@ export const routes: Routes = [
                     {path: 'commandes', component: OrderListComponent},
                     {path: 'ligne-de-commandes', component: OrderLineListComponent},
                     {path: 'traitement-commandes', component: OrderProcessEmployeeComponent},
-                    {path: 'commande/:id', component: OrderDetailsComponent}
+                    {path: 'commande/:id', component: OrderDetailsComponent},
+                    {path: 'info-personnelles', component: EmployeeInfoComponent},
                 ]
             },
             {path: 'client', component: CustomerDashboardComponent, canActivate:[customerGuard], 
