@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Civility, Employee, EmployeeStatus, patchEmployee} from '../../../shared/entities';
 import { UserService } from '../../../shared/services/user.service';
@@ -8,14 +8,20 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { EmployeeStatusService } from '../../../shared/services/employee-status.service';
 import { EmployeeService } from '../../../shared/services/employee.service';
+import {
+  MatDialog
+} from '@angular/material/dialog';
+import { DialogDeleteConfirmComponent } from '../../../dialog-delete-confirm/dialog-delete-confirm.component';
+
 
 
 @Component({
   selector: 'app-employee-details',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, DialogDeleteConfirmComponent],
   templateUrl: './employee-details.component.html',
-  styleUrl: './employee-details.component.css'
+  styleUrl: './employee-details.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmployeeDetailsComponent implements OnInit {
 
@@ -25,6 +31,7 @@ export class EmployeeDetailsComponent implements OnInit {
   private civilityService = inject(CivilityService);
   private employeeService = inject(EmployeeService);
   private employeeStatusService = inject(EmployeeStatusService);
+  readonly dialog = inject(MatDialog);
   id!:string;
   employee$:Employee | undefined;
   civilities$!: Observable<Civility[]>;
@@ -103,7 +110,6 @@ export class EmployeeDetailsComponent implements OnInit {
         email: this.form.value.email,
         civility: 'api/civilities/' + this.form.value.civility
       };
-      console.log(employee);
       this.updateEmpoyeeDetails(this.id, employee).subscribe(
         {    
           next: (validation) => {console.log('Les modifications ont été effectuées') 
@@ -135,14 +141,38 @@ export class EmployeeDetailsComponent implements OnInit {
 
   
   deleteEmployeeAccount() {
-    return this.employeeService.deleteEmployee(this.id).subscribe(
-      {    
-        next: () => {console.log('Le compte a bien été supprimé') 
-          this.router.navigateByUrl('/espace-prive/admin/employees');
-        },
-        error: (error) => console.error('Il y a eu une erreur lors de la suppression du compte'),
-      });
-    
+    const employee:patchEmployee = {
+      lastname: 'anonyme',
+      firstname : 'anonyme',
+      phone: ' ',
+      email: 'anonyme@mail.com',
+      civility: 'api/civilities/' + this.form.value.civility
+    };
+
+    return this.updateEmpoyeeDetails(this.id, employee).subscribe(
+    {    
+      next: (validation) => {console.log('Le compte a été supprimé') 
+        this.form.reset();
+        location.reload();
+      },
+      error: (error) => console.error('Il y a eu une erreur lors de la modification des informations du compte'),
+    });
+
+  }
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    const dialogRef = this.dialog.open(DialogDeleteConfirmComponent, {
+      width: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteEmployeeAccount();
+      }
+    });
+
   }
 
 

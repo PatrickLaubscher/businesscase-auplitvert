@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../../shared/services/order.service';
 import { Order } from '../../../shared/entities';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,6 @@ import { TotalOrderPipe } from '../../../shared/services/pipes/total-order.pipe'
 export class OrderDetailsComponent implements OnInit {
 
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
   private orderService = inject(OrderService);
   id!:string;
   order$! : Order;
@@ -24,7 +23,6 @@ export class OrderDetailsComponent implements OnInit {
   ngOnInit():void {
     this.fetchOneOrder();
   }
-
 
   fetchOneOrder() {
     let idSearch = this.route.snapshot.paramMap.get('id');

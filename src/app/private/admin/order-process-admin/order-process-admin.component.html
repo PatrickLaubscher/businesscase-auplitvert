@@ -44,7 +44,7 @@
                     <form class="max-w-screen-sm md:w-1/3 mx-auto" [formGroup]="form" (ngSubmit)="onSubmit(orderLine.id)">
                         <label for="orderStatusId" class="block mb-2 text-base lato-bold text-brown dark:text-white">Mettre à jour le statut</label>
                         <select formControlName="orderStatusId" id="orderStatusId" class="block py-2.5 px-0 w-full text-brown text-base bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-900 focus:outline-none focus:ring-0 focus:border-green-900 peer" required>
-                            @for (status of orderLineStatus$ | async; track status) {
+                            @for (status of orderLineStatus; track status) {
                               <option class="text-brown text-center" value="{{status.id}}">{{status.name}}</option>
                             }
                         </select>

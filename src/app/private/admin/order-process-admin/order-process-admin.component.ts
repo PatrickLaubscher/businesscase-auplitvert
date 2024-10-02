@@ -23,9 +23,9 @@ export class OrderProcessAdminComponent implements OnInit {
   private router = inject(Router);
 
   orderLineStatus$!: Observable<OrderLineStatus[]>;
+  orderLineStatus: OrderLineStatus[] = [];
   orderLines$!: Observable<OrderLine[]>;
   orderLines : OrderLine[] = [];
-
 
   form: FormGroup = new FormGroup({
     orderStatusId: new FormControl('', {validators: [Validators.required]})
@@ -46,6 +46,9 @@ export class OrderProcessAdminComponent implements OnInit {
 
   fetchAllOrderLineStatus() {
     this.orderLineStatus$ = this.orderLineStatusService.fetchAllOrderLineStatus();
+    this.orderLineStatus$.subscribe (
+      data => {this.orderLineStatus = data;}
+    )
   }
 
 
