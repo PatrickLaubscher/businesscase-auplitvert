@@ -16,7 +16,7 @@ import {
   templateUrl: './dialog-delete-confirm.component.html',
   styleUrl: './dialog-delete-confirm.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  
+  providers: [DialogDeleteConfirmComponent]
 })
 export class DialogDeleteConfirmComponent {
 
