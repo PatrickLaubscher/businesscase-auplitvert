@@ -1,8 +1,14 @@
-<h2 mat-dialog-title>Suppression du compte</h2>
+<h2 mat-dialog-title>
+    <span class="text-2xl lato-bold">
+        Suppression du compte
+    </span>
+</h2>
 <mat-dialog-content>
-  Êtes-vous sûr de vouloir supprimer le compte?
+    <span  class="text-base lato-semibold">
+        Êtes-vous sûr de vouloir supprimer le compte?
+    </span>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="onNoClick()">No</button>
-  <button mat-button mat-dialog-close color="warn" (click)="onYesClick()">Oui</button>
+  <button mat-button mat-dialog-close color="warn" (click)="onNoClick()">Annuler</button>
+  <button mat-button mat-dialog-close (click)="onYesClick()">Oui, je confirme</button>
 </mat-dialog-actions>
