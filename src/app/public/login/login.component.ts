@@ -42,6 +42,7 @@ export class LoginComponent {
                 if(data) {
                   this.user = data;
                   this.userService.setUser(this.user);
+                  console.log(this.userService.getUser());
 
                   if(this.userService.getRoles()?.includes('ROLE_ADMIN')){
                     this.router.navigateByUrl('espace-prive/admin');
